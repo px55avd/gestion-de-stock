@@ -56,14 +56,6 @@ namespace PoC_gestion_stocks_ETML
                         this.Hide();
                         Controller.changeView("Viewdashboard");
                     }
-                    else
-                    {
-
-                        MessageBox.Show("Mot de passe ou login incorrect");
-                        break;
-
-                    }
-
                 }
             }
 
