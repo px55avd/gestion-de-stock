@@ -19,10 +19,12 @@ namespace PoC_gestion_stocks_ETML.Model
         // Prepare the connection
         private string myConnectionString = "datasource=localhost;port=6033;username=root;password=root;database=db_gestionStockage;";
         private MySqlConnection myConnection;
-        private int _line;
-        
+        private int _lineUser;
+        private int _lineArticle;
+        private int _lineCategory;
 
-        
+
+
         /// <summary>
         /// Constructeur par défaut
         /// </summary>
@@ -55,7 +57,7 @@ namespace PoC_gestion_stocks_ETML.Model
             }
         }
 
-        private void getNumberLine()
+        private void getNumberLineUser()
         {
             myConnection = new MySqlConnection(myConnectionString);
 
@@ -74,10 +76,6 @@ namespace PoC_gestion_stocks_ETML.Model
 
                 // Execute the query
                 reader = commandDatabase.ExecuteReader();
-
-                
-
-                // All succesfully executed, now do something
 
                 if (reader.HasRows)
                 {
@@ -103,72 +101,113 @@ namespace PoC_gestion_stocks_ETML.Model
                 MessageBox.Show($"Échec de la connexion : {ex.Message}");
             }
 
-            _line = count;
+            _lineUser = count;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string[] Readrows()
+
+        private void getNumberLineArticle()
         {
             myConnection = new MySqlConnection(myConnectionString);
 
-            string query = "SELECT * FROM t_utilisateur";
+            string query = "SELECT COUNT(*) FROM t_article";
 
-            MySqlCommand commandDatabase = new MySqlCommand(query, myConnection);
-
+            MySqlCommand commandDatabase = new MySqlCommand(query, myConnection); ;
             MySqlDataReader reader;
 
-            string[] result = new string[0];
+            //Compteur
+            int count = 0;
 
             try
             {
-
                 // Open the database
                 myConnection.Open();
 
                 // Execute the query
                 reader = commandDatabase.ExecuteReader();
 
-                //Table to get names ogf columns
-                result = new string[reader.FieldCount];
-
-                // All succesfully executed, now do something
                 if (reader.HasRows)
                 {
+
                     while (reader.Read())
                     {
-                        // Do something with every received database ROW
-                        string[] row = { reader.GetName(0), reader.GetName(1), reader.GetName(2), reader.GetName(3) };
-
-                        result = row;
+                        count = reader.GetInt32(0);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Pas de colonnes 2");
+                    MessageBox.Show("Pas de colonnes 1");
                 }
 
                 // Finally close the connection     
+                reader.Close();
                 myConnection.Close();
+
             }
             catch (Exception ex)
             {
                 // Show any error message.
-                MessageBox.Show($"Échec de la connexion 1 : {ex.Message}");
+                MessageBox.Show($"Échec de la connexion : {ex.Message}");
             }
 
-            return result;
+            _lineArticle = count;
         }
+
+        private void getNumberLineCategory()
+        {
+            myConnection = new MySqlConnection(myConnectionString);
+
+            string query = "SELECT COUNT(*) FROM t_catégorie";
+
+            MySqlCommand commandDatabase = new MySqlCommand(query, myConnection); ;
+            MySqlDataReader reader;
+
+            //Compteur
+            int count = 0;
+
+            try
+            {
+                // Open the database
+                myConnection.Open();
+
+                // Execute the query
+                reader = commandDatabase.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+
+                    while (reader.Read())
+                    {
+                        count = reader.GetInt32(0);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Pas de colonnes 1");
+                }
+
+                // Finally close the connection     
+                reader.Close();
+                myConnection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                // Show any error message.
+                MessageBox.Show($"Échec de la connexion : {ex.Message}");
+            }
+
+            _lineCategory = count;
+        }
+
 
         /// <summary>
         /// 
         /// 
         /// </summary>
         /// <returns></returns>
-        public string[,] Getdata()
+        public string[,] GetuserData()
         {
-            getNumberLine();
+            getNumberLineUser();
 
             myConnection = new MySqlConnection(myConnectionString);
 
@@ -188,7 +227,7 @@ namespace PoC_gestion_stocks_ETML.Model
                 // Execute the query
                 reader = commandDatabase.ExecuteReader();
 
-                data = new string[_line, reader.FieldCount];
+                data = new string[_lineUser, reader.FieldCount];
 
                 //Compteur
                 int count = 0;
@@ -323,5 +362,158 @@ namespace PoC_gestion_stocks_ETML.Model
                 MessageBox.Show(ex.Message);
             }
         }
+
+        /// <summary>
+        /// 
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string[,] GetarticleData()
+        {
+            getNumberLineArticle();
+
+            myConnection = new MySqlConnection(myConnectionString);
+
+            string query = "SELECT * FROM t_article";
+
+            MySqlCommand commandDatabase = new MySqlCommand(query, myConnection);
+
+            MySqlDataReader reader;
+
+            string[,] data = new string[0, 0];
+
+            try
+            {
+                // Open the database
+                myConnection.Open();
+
+                // Execute the query
+                reader = commandDatabase.ExecuteReader();
+
+                data = new string[_lineArticle, reader.FieldCount];
+
+                //Compteur
+                int count = 0;
+
+                // All succesfully executed, now do something
+
+                if (reader.HasRows)
+                {
+
+                    while (reader.Read())
+                    {
+
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            data[count, i] = reader.GetValue(i).ToString();
+                        }
+
+                        count++;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Pas de colonnes 3");
+                }
+
+                // Finally close the connection     
+                myConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                // Show any error message.
+                MessageBox.Show($"Échec de la connexion 2: {ex.Message}");
+            }
+
+            return data;
+        }
+
+
+        public string[,] GetcategoryData()
+        {
+            getNumberLineCategory();
+
+            myConnection = new MySqlConnection(myConnectionString);
+
+            string query = "SELECT * FROM t_catégorie";
+
+            MySqlCommand commandDatabase = new MySqlCommand(query, myConnection);
+
+            MySqlDataReader reader;
+
+            string[,] data = new string[0, 0];
+
+            try
+            {
+                // Open the database
+                myConnection.Open();
+
+                // Execute the query
+                reader = commandDatabase.ExecuteReader();
+
+                data = new string[_lineCategory, reader.FieldCount];
+
+                //Compteur
+                int count = 0;
+
+                if (reader.HasRows)
+                {
+
+                    while (reader.Read())
+                    {
+
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            data[count, i] = reader.GetValue(i).ToString();
+                        }
+
+                        count++;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Pas de colonnes 3");
+                }
+
+                // Finally close the connection     
+                myConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                // Show any error message.
+                MessageBox.Show($"Échec de la connexion 2: {ex.Message}");
+            }
+
+            return data;
+        }
+
+
+        public void SaveNewArticle(string name, string description, string quantity, string unitPrice, string categoryID)
+        {
+
+            string query = "INSERT INTO t_article(`article_id`, `nom`, `description`, `quantité`, `prix_unitaire`,  `catégorie_id`) VALUES (NULL, '" + name + "', '" + description + "', '" + quantity + "', '" + unitPrice + "', '" + categoryID + "')";
+
+            MySqlConnection databaseConnection = new MySqlConnection(myConnectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
+
+
+            try
+            {
+                databaseConnection.Open();
+
+                reader = commandDatabase.ExecuteReader();
+
+                MessageBox.Show("Article succesfully registered");
+
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                // Show any error message.
+                MessageBox.Show(ex.Message);
+            }
+        }
+
     }
 }

@@ -62,5 +62,32 @@ namespace PoC_gestion_stocks_ETML.Views
             this.Hide();
 
         }
+
+        private void ViewoneArticle_Activated(object sender, EventArgs e)
+        {
+            txtboxName.Text = "";
+            txtboxDescription.Text = "";
+            txtboxHowmany.Text = "";
+            txtboxPrice.Text = "";
+            cmboxCategory.Items.Clear();
+
+            txtboxName.Text = Controller.SetcurrentArticle()[1];
+            txtboxDescription.Text = Controller.SetcurrentArticle()[2];
+            txtboxHowmany.Text = Controller.SetcurrentArticle()[3];
+            txtboxPrice.Text = Controller.SetcurrentArticle()[4];
+
+            for (int i = 0; i < Controller.TransfercategoryData().GetLength(0); i++)
+            {
+                if (Controller.TransfercategoryData()[i,0] ==Controller.SetcurrentArticle()[5])
+                {
+                    cmboxCategory.Text = Controller.TransfercategoryData()[i, 1];
+                }
+                else
+                {
+                    cmboxCategory.Items.Add(Controller.TransfercategoryData()[i, 1]);
+                }
+            }
+
+        }
     }
 }

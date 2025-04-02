@@ -35,7 +35,7 @@ namespace PoC_gestion_stocks_ETML
         {
             string[,] data;
 
-            data = Controller.Transferdata();
+            data = Controller.TransferuserData();
 
 
             if (txtboxUsename.Text == "" && txtboxPassword.Text == "")

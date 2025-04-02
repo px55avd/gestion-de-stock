@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlArticlebutton = new System.Windows.Forms.Panel();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnAccount = new System.Windows.Forms.Button();
             this.btnMouvement = new System.Windows.Forms.Button();
@@ -46,12 +46,12 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnlArticlebutton
             // 
-            this.panel1.Location = new System.Drawing.Point(220, 106);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(507, 285);
-            this.panel1.TabIndex = 25;
+            this.pnlArticlebutton.Location = new System.Drawing.Point(220, 106);
+            this.pnlArticlebutton.Name = "pnlArticlebutton";
+            this.pnlArticlebutton.Size = new System.Drawing.Size(507, 299);
+            this.pnlArticlebutton.TabIndex = 25;
             // 
             // btnLogOut
             // 
@@ -158,27 +158,29 @@
             // btnUp
             // 
             this.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnUp.Location = new System.Drawing.Point(734, 397);
+            this.btnUp.Location = new System.Drawing.Point(769, 411);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(20, 23);
             this.btnUp.TabIndex = 27;
             this.btnUp.Text = "+";
             this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
             // btnMinus
             // 
             this.btnMinus.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMinus.Location = new System.Drawing.Point(689, 397);
+            this.btnMinus.Location = new System.Drawing.Point(724, 411);
             this.btnMinus.Name = "btnMinus";
             this.btnMinus.Size = new System.Drawing.Size(20, 23);
             this.btnMinus.TabIndex = 28;
             this.btnMinus.Text = "-";
             this.btnMinus.UseVisualStyleBackColor = true;
+            this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
             // 
             // lblNumberpages
             // 
             this.lblNumberpages.AutoSize = true;
-            this.lblNumberpages.Location = new System.Drawing.Point(714, 401);
+            this.lblNumberpages.Location = new System.Drawing.Point(749, 415);
             this.lblNumberpages.Name = "lblNumberpages";
             this.lblNumberpages.Size = new System.Drawing.Size(13, 15);
             this.lblNumberpages.TabIndex = 29;
@@ -212,7 +214,7 @@
             this.Controls.Add(this.btnMinus);
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.btnNewarticle);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlArticlebutton);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnAccount);
             this.Controls.Add(this.btnMouvement);
@@ -225,6 +227,7 @@
             this.Name = "Viewarticle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Viewarticle";
+            this.Activated += new System.EventHandler(this.Viewarticle_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,7 +235,7 @@
 
         #endregion
 
-        private Panel panel1;
+        private Panel pnlArticlebutton;
         private Button btnLogOut;
         private Button btnAccount;
         private Button btnMouvement;

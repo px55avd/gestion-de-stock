@@ -35,7 +35,7 @@
             this.txtboxHowmany = new System.Windows.Forms.TextBox();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnAccount = new System.Windows.Forms.Button();
-            this.btnMouvement = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.btnArticle = new System.Windows.Forms.Button();
             this.btnDashboard = new System.Windows.Forms.Button();
             this.lblNewMouvement = new System.Windows.Forms.Label();
@@ -110,15 +110,16 @@
             this.btnAccount.Text = "Compte";
             this.btnAccount.UseVisualStyleBackColor = true;
             // 
-            // btnMouvement
+            // btnBack
             // 
-            this.btnMouvement.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnMouvement.Location = new System.Drawing.Point(26, 266);
-            this.btnMouvement.Name = "btnMouvement";
-            this.btnMouvement.Size = new System.Drawing.Size(107, 52);
-            this.btnMouvement.TabIndex = 99;
-            this.btnMouvement.Text = "Mouvement";
-            this.btnMouvement.UseVisualStyleBackColor = true;
+            this.btnBack.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnBack.Location = new System.Drawing.Point(26, 266);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(107, 52);
+            this.btnBack.TabIndex = 99;
+            this.btnBack.Text = "Retour";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnArticle
             // 
@@ -232,7 +233,7 @@
             this.Controls.Add(this.txtboxHowmany);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnAccount);
-            this.Controls.Add(this.btnMouvement);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnArticle);
             this.Controls.Add(this.btnDashboard);
             this.Controls.Add(this.lblNewMouvement);
@@ -255,7 +256,7 @@
         private TextBox txtboxHowmany;
         private Button btnLogOut;
         private Button btnAccount;
-        private Button btnMouvement;
+        private Button btnBack;
         private Button btnArticle;
         private Button btnDashboard;
         private Label lblNewMouvement;

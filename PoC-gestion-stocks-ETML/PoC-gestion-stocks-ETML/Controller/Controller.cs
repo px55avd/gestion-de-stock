@@ -25,14 +25,10 @@ namespace PoC_gestion_stocks_ETML.Controller
         private Model.Model _model;
 
         //Variable privée
-        private string _currrentUserindex;
-        private string _currrentUserfirstname;
-        private string _currrentUserName;
-        private string _currrentUserlogin;
-        private string _currrentUserPaswword;
-        private string _currrentUserrole;
+
 
         private string[] _currentUser = new string[6];
+        private string[] _currentarticle = new string[6];
 
         public Controller(View view, Model.Model model,  Viewdashboard viewdashborad, Viewarticle viewarticle, ViewMouvement viewmouvement,
             ViewnewArticle viewnewArticle, ViewAccount viewaccount, ViewoneArticle viewoneArticle, ViewnewUser viewnewUser, ViewnewMouvement viewnewMouvement)
@@ -124,11 +120,31 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// <summary>
         /// 
         /// </summary>
-        public string[,] Transferdata()
+        public string[,] TransferuserData()
         {
-            return _model.Getdata();
+            return _model.GetuserData();
 
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string[,] TransferarticleData()
+        {
+            return _model.GetarticleData();
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string[,] TransfercategoryData()
+        {
+            return _model.GetcategoryData();
+
+        }
+
 
         /// <summary>
         /// 
@@ -136,10 +152,16 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// <param name="name"></param>
         /// <param name="firstname"></param>
         /// <param name="address"></param>
-        public void Intergerdata(string firstname, string name, string login, string password, int role)
+        public void IntergerdataUser(string firstname, string name, string login, string password, int role)
         {
             _model.SaveNewuser(firstname, name, login, password, role);
         }
+
+        public void IntergerdataArticle(string name, string description, string quantity, string unitPrice, string categoryID)
+        {
+            _model.SaveNewArticle(name, description, quantity, unitPrice, categoryID);
+        }
+        
 
         /// <summary>
         /// /
@@ -148,7 +170,7 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// <param name="firstname"></param>
         /// <param name="name"></param>
         /// <param name="address"></param>
-        public void Updatedata(string id, string firstname, string name, string address)
+        public void UpdatedataUser(string id, string firstname, string name, string address)
         {
             _model.updateUser(id, firstname, name, address);
 
@@ -177,19 +199,24 @@ namespace PoC_gestion_stocks_ETML.Controller
         public void Getcurrentuser(string currrentUserindex, string currrentUserfirstname ,string currrentUserName   ,string currrentUserlogin ,string currrentUserPaswword ,string currrentUserrole)
         {
 
-              //_currrentUserindex = currrentUserindex;
-              //_currrentUserfirstname = currrentUserfirstname;
-              //_currrentUserName = currrentUserName;
-              //_currrentUserlogin = currrentUserlogin;
-              //_currrentUserPaswword = currrentUserPaswword;
-              //_currrentUserrole = currrentUserrole;
-
             _currentUser[0] = currrentUserindex;
             _currentUser[1] = currrentUserfirstname;
             _currentUser[2] = currrentUserName;
             _currentUser[3] = currrentUserlogin;
             _currentUser[4] = currrentUserPaswword;
             _currentUser[5] = currrentUserrole;
+
+        }
+
+        public void Getcurrentarticle(string currrentArtileindex, string currrentArticleName, string currrentArticledescription, string currrentArticlequantity, string currrentArticleunitPrice, string currrentArticleCatégorie)
+        {
+
+            _currentarticle[0] = currrentArtileindex;
+            _currentarticle[1] = currrentArticleName;
+            _currentarticle[2] = currrentArticledescription;
+            _currentarticle[3] = currrentArticlequantity;
+            _currentarticle[4] = currrentArticleunitPrice;
+            _currentarticle[5] = currrentArticleCatégorie;
 
         }
 
@@ -202,6 +229,16 @@ namespace PoC_gestion_stocks_ETML.Controller
         {
             //
             return _currentUser;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string[] SetcurrentArticle()
+        {
+            //
+            return _currentarticle;
         }
 
 

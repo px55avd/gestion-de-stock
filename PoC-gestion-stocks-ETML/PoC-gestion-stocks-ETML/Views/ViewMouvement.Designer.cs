@@ -100,6 +100,7 @@
             this.btnNewMouvement.TabIndex = 42;
             this.btnNewMouvement.Text = "Nouvel mouvement";
             this.btnNewMouvement.UseVisualStyleBackColor = true;
+            this.btnNewMouvement.Click += new System.EventHandler(this.btnNewMouvement_Click);
             // 
             // panel1
             // 

@@ -55,7 +55,7 @@
             this.btnLogOut.Location = new System.Drawing.Point(688, 12);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(101, 27);
-            this.btnLogOut.TabIndex = 56;
+            this.btnLogOut.TabIndex = 11;
             this.btnLogOut.Text = "Déconnexion";
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
@@ -66,7 +66,7 @@
             this.btnAccount.Location = new System.Drawing.Point(26, 368);
             this.btnAccount.Name = "btnAccount";
             this.btnAccount.Size = new System.Drawing.Size(107, 52);
-            this.btnAccount.TabIndex = 55;
+            this.btnAccount.TabIndex = 10;
             this.btnAccount.Text = "Compte";
             this.btnAccount.UseVisualStyleBackColor = true;
             this.btnAccount.Click += new System.EventHandler(this.btnAccount_Click);
@@ -77,7 +77,7 @@
             this.btnMouvement.Location = new System.Drawing.Point(26, 266);
             this.btnMouvement.Name = "btnMouvement";
             this.btnMouvement.Size = new System.Drawing.Size(107, 52);
-            this.btnMouvement.TabIndex = 54;
+            this.btnMouvement.TabIndex = 9;
             this.btnMouvement.Text = "Mouvement";
             this.btnMouvement.UseVisualStyleBackColor = true;
             this.btnMouvement.Click += new System.EventHandler(this.btnMouvement_Click);
@@ -88,7 +88,7 @@
             this.btnBack.Location = new System.Drawing.Point(26, 165);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(107, 52);
-            this.btnBack.TabIndex = 53;
+            this.btnBack.TabIndex = 8;
             this.btnBack.Text = "Retour";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -99,7 +99,7 @@
             this.btnDashboard.Location = new System.Drawing.Point(26, 73);
             this.btnDashboard.Name = "btnDashboard";
             this.btnDashboard.Size = new System.Drawing.Size(107, 52);
-            this.btnDashboard.TabIndex = 52;
+            this.btnDashboard.TabIndex = 7;
             this.btnDashboard.Text = "Dashboard";
             this.btnDashboard.UseVisualStyleBackColor = true;
             this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
@@ -147,23 +147,24 @@
             this.btnvalidnewArticle.Location = new System.Drawing.Point(491, 369);
             this.btnvalidnewArticle.Name = "btnvalidnewArticle";
             this.btnvalidnewArticle.Size = new System.Drawing.Size(103, 41);
-            this.btnvalidnewArticle.TabIndex = 57;
+            this.btnvalidnewArticle.TabIndex = 6;
             this.btnvalidnewArticle.Text = "Valider";
             this.btnvalidnewArticle.UseVisualStyleBackColor = true;
+            this.btnvalidnewArticle.Click += new System.EventHandler(this.btnvalidnewArticle_Click);
             // 
             // txtboxHowmany
             // 
             this.txtboxHowmany.Location = new System.Drawing.Point(345, 149);
             this.txtboxHowmany.Name = "txtboxHowmany";
             this.txtboxHowmany.Size = new System.Drawing.Size(249, 23);
-            this.txtboxHowmany.TabIndex = 58;
+            this.txtboxHowmany.TabIndex = 2;
             // 
             // txtboxPrice
             // 
             this.txtboxPrice.Location = new System.Drawing.Point(345, 204);
             this.txtboxPrice.Name = "txtboxPrice";
             this.txtboxPrice.Size = new System.Drawing.Size(249, 23);
-            this.txtboxPrice.TabIndex = 59;
+            this.txtboxPrice.TabIndex = 3;
             // 
             // lblHowmany
             // 
@@ -197,7 +198,7 @@
             this.txtboxName.Location = new System.Drawing.Point(345, 91);
             this.txtboxName.Name = "txtboxName";
             this.txtboxName.Size = new System.Drawing.Size(249, 23);
-            this.txtboxName.TabIndex = 64;
+            this.txtboxName.TabIndex = 1;
             // 
             // lblDescription
             // 
@@ -222,7 +223,7 @@
             this.txtboxDescription.Location = new System.Drawing.Point(345, 321);
             this.txtboxDescription.Name = "txtboxDescription";
             this.txtboxDescription.Size = new System.Drawing.Size(249, 23);
-            this.txtboxDescription.TabIndex = 67;
+            this.txtboxDescription.TabIndex = 5;
             // 
             // cmboxCategory
             // 
@@ -230,7 +231,7 @@
             this.cmboxCategory.Location = new System.Drawing.Point(345, 264);
             this.cmboxCategory.Name = "cmboxCategory";
             this.cmboxCategory.Size = new System.Drawing.Size(249, 23);
-            this.cmboxCategory.TabIndex = 70;
+            this.cmboxCategory.TabIndex = 4;
             // 
             // ViewnewArticle
             // 
@@ -260,6 +261,7 @@
             this.Name = "ViewnewArticle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ViewnewArticle";
+            this.Activated += new System.EventHandler(this.ViewnewArticle_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 

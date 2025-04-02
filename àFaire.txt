@@ -1,0 +1,6 @@
+Liste de mouvement
+ajouter un mouvement gérer les quantités
+modifier un article
+dashboard article critique 
+dashboard dernier mouvement
+dashboard total de stock

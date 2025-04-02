@@ -60,5 +60,40 @@ namespace PoC_gestion_stocks_ETML.Views
             Controller.changeView("View");
             this.Hide();
         }
+
+        private void ViewnewArticle_Activated(object sender, EventArgs e)
+        {
+            cmboxCategory.Items.Clear();
+
+            for (int i = 0; i < Controller.TransfercategoryData().GetLength(0); i++)
+            {
+               cmboxCategory.Items.Add(Controller.TransfercategoryData()[i, 1]);
+            }
+        }
+
+        private void btnvalidnewArticle_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < Controller.TransfercategoryData().GetLength(0); i++)
+            {
+                if (Controller.TransfercategoryData()[i, 1] == cmboxCategory.Text)
+                {
+                    if (txtboxName.Text == "" || txtboxDescription.Text == "" || txtboxHowmany.Text == "" || txtboxPrice.Text == "" || cmboxCategory.Text == "")
+                    {
+                        MessageBox.Show("Un des champs est vide !!!");
+                    }
+                    else
+                    {
+                        Controller.IntergerdataArticle(txtboxName.Text, txtboxDescription.Text, txtboxHowmany.Text, txtboxPrice.Text, Controller.TransfercategoryData()[i, 0]);
+                        cmboxCategory.Items.Clear();
+
+                        this.Hide();
+                        // Afficher la vue du compte utilisateur
+                        Controller.changeView("Viewarticle");
+                    }
+                }
+
+            }
+
+        }
     }
 }

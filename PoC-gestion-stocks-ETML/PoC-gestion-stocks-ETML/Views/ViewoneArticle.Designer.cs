@@ -192,9 +192,9 @@
             this.lblNamearticle.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblNamearticle.Location = new System.Drawing.Point(416, 7);
             this.lblNamearticle.Name = "lblNamearticle";
-            this.lblNamearticle.Size = new System.Drawing.Size(135, 28);
+            this.lblNamearticle.Size = new System.Drawing.Size(151, 28);
             this.lblNamearticle.TabIndex = 74;
-            this.lblNamearticle.Text = "Ajout d\'article";
+            this.lblNamearticle.Text = "Nom de l\'article";
             // 
             // lblMenu
             // 
@@ -271,6 +271,7 @@
             this.Name = "ViewoneArticle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ViewoneArticle";
+            this.Activated += new System.EventHandler(this.ViewoneArticle_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 

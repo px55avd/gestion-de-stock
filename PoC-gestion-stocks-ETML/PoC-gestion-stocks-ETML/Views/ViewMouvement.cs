@@ -53,5 +53,12 @@ namespace PoC_gestion_stocks_ETML.Views
             Controller.changeView("View");
             this.Hide();
         }
+
+        private void btnNewMouvement_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            // Afficher la vue du compte utilisateur
+            Controller.changeView("ViewnewMouvement");
+        }
     }
 }
