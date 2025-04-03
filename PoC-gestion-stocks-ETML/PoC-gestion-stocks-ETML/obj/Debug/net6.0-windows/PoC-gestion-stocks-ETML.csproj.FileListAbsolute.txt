@@ -90,3 +90,4 @@ D:\FIN2\TPI\P_Appro2\PoC-gestion-stocks-ETML\PoC-gestion-stocks-ETML\obj\Debug\n
 D:\FIN2\TPI\P_Appro2\PoC-gestion-stocks-ETML\PoC-gestion-stocks-ETML\obj\Debug\net6.0-windows\PoC_gestion_stocks_ETML.Views.ViewnewMouvement.resources
 D:\FIN2\TPI\P_Appro2\PoC-gestion-stocks-ETML\PoC-gestion-stocks-ETML\obj\Debug\net6.0-windows\PoC_gestion_stocks_ETML.Views.ViewnewUser.resources
 D:\FIN2\TPI\P_Appro2\PoC-gestion-stocks-ETML\PoC-gestion-stocks-ETML\obj\Debug\net6.0-windows\PoC_gestion_stocks_ETML.Views.Viewdashboard.resources
+D:\FIN2\TPI\P_Appro2\PoC-gestion-stocks-ETML\PoC-gestion-stocks-ETML\obj\Debug\net6.0-windows\PoC_gestion_stocks_ETML.Views.ViewoneMouvement.resources

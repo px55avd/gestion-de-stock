@@ -28,5 +28,8 @@
     <Compile Update="Views\View.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\ViewoneMouvement.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

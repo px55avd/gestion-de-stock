@@ -1,6 +1,6 @@
 ﻿namespace PoC_gestion_stocks_ETML.Views
 {
-    partial class ViewnewMouvement
+    partial class ViewoneMouvement
     {
         /// <summary>
         /// Required designer variable.
@@ -28,67 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmboxArticle = new System.Windows.Forms.ComboBox();
-            this.LblDatetime = new System.Windows.Forms.Label();
-            this.lblArticle = new System.Windows.Forms.Label();
-            this.lblHowmany = new System.Windows.Forms.Label();
-            this.txtboxHowmany = new System.Windows.Forms.TextBox();
+            this.LblNamefirstname = new System.Windows.Forms.Label();
+            this.txtboxNamefirstname = new System.Windows.Forms.TextBox();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnAccount = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnArticle = new System.Windows.Forms.Button();
             this.btnDashboard = new System.Windows.Forms.Button();
-            this.lblNewMouvement = new System.Windows.Forms.Label();
+            this.lblNamearticle = new System.Windows.Forms.Label();
             this.lblMenu = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dtmpMouvement = new System.Windows.Forms.DateTimePicker();
-            this.rdbtnEntry = new System.Windows.Forms.RadioButton();
             this.rdbtnExit = new System.Windows.Forms.RadioButton();
-            this.btnvalidnewMouvement = new System.Windows.Forms.Button();
+            this.rdbtnEntry = new System.Windows.Forms.RadioButton();
+            this.LblDatetime = new System.Windows.Forms.Label();
+            this.lblArticle = new System.Windows.Forms.Label();
+            this.lblHowmany = new System.Windows.Forms.Label();
+            this.txtboxHowmany = new System.Windows.Forms.TextBox();
+            this.txtboxArticle = new System.Windows.Forms.TextBox();
+            this.txtboxDate = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // cmboxArticle
+            // LblNamefirstname
             // 
-            this.cmboxArticle.FormattingEnabled = true;
-            this.cmboxArticle.Location = new System.Drawing.Point(351, 258);
-            this.cmboxArticle.Name = "cmboxArticle";
-            this.cmboxArticle.Size = new System.Drawing.Size(249, 23);
-            this.cmboxArticle.TabIndex = 111;
+            this.LblNamefirstname.AutoSize = true;
+            this.LblNamefirstname.Location = new System.Drawing.Point(345, 73);
+            this.LblNamefirstname.Name = "LblNamefirstname";
+            this.LblNamefirstname.Size = new System.Drawing.Size(92, 15);
+            this.LblNamefirstname.TabIndex = 108;
+            this.LblNamefirstname.Text = "Prénom et Nom";
             // 
-            // LblDatetime
+            // txtboxNamefirstname
             // 
-            this.LblDatetime.AutoSize = true;
-            this.LblDatetime.Location = new System.Drawing.Point(351, 127);
-            this.LblDatetime.Name = "LblDatetime";
-            this.LblDatetime.Size = new System.Drawing.Size(77, 15);
-            this.LblDatetime.TabIndex = 108;
-            this.LblDatetime.Text = "Date et heure";
-            // 
-            // lblArticle
-            // 
-            this.lblArticle.AutoSize = true;
-            this.lblArticle.Location = new System.Drawing.Point(351, 240);
-            this.lblArticle.Name = "lblArticle";
-            this.lblArticle.Size = new System.Drawing.Size(41, 15);
-            this.lblArticle.TabIndex = 106;
-            this.lblArticle.Text = "Article";
-            // 
-            // lblHowmany
-            // 
-            this.lblHowmany.AutoSize = true;
-            this.lblHowmany.Location = new System.Drawing.Point(351, 186);
-            this.lblHowmany.Name = "lblHowmany";
-            this.lblHowmany.Size = new System.Drawing.Size(53, 15);
-            this.lblHowmany.TabIndex = 104;
-            this.lblHowmany.Text = "Quantité";
-            // 
-            // txtboxHowmany
-            // 
-            this.txtboxHowmany.Location = new System.Drawing.Point(351, 204);
-            this.txtboxHowmany.Name = "txtboxHowmany";
-            this.txtboxHowmany.Size = new System.Drawing.Size(249, 23);
-            this.txtboxHowmany.TabIndex = 102;
+            this.txtboxNamefirstname.Location = new System.Drawing.Point(345, 91);
+            this.txtboxNamefirstname.Name = "txtboxNamefirstname";
+            this.txtboxNamefirstname.Size = new System.Drawing.Size(249, 23);
+            this.txtboxNamefirstname.TabIndex = 107;
             // 
             // btnLogOut
             // 
@@ -109,6 +84,7 @@
             this.btnAccount.TabIndex = 100;
             this.btnAccount.Text = "Compte";
             this.btnAccount.UseVisualStyleBackColor = true;
+            this.btnAccount.Click += new System.EventHandler(this.btnAccount_Click);
             // 
             // btnBack
             // 
@@ -117,7 +93,7 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(107, 52);
             this.btnBack.TabIndex = 99;
-            this.btnBack.Text = "Retour";
+            this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
@@ -130,6 +106,7 @@
             this.btnArticle.TabIndex = 98;
             this.btnArticle.Text = "Article";
             this.btnArticle.UseVisualStyleBackColor = true;
+            this.btnArticle.Click += new System.EventHandler(this.btnArticle_Click);
             // 
             // btnDashboard
             // 
@@ -140,16 +117,17 @@
             this.btnDashboard.TabIndex = 97;
             this.btnDashboard.Text = "Dashboard";
             this.btnDashboard.UseVisualStyleBackColor = true;
+            this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
-            // lblNewMouvement
+            // lblNamearticle
             // 
-            this.lblNewMouvement.AutoSize = true;
-            this.lblNewMouvement.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblNewMouvement.Location = new System.Drawing.Point(376, 9);
-            this.lblNewMouvement.Name = "lblNewMouvement";
-            this.lblNewMouvement.Size = new System.Drawing.Size(202, 28);
-            this.lblNewMouvement.TabIndex = 96;
-            this.lblNewMouvement.Text = "Nouveau Mouvement";
+            this.lblNamearticle.AutoSize = true;
+            this.lblNamearticle.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblNamearticle.Location = new System.Drawing.Point(416, 7);
+            this.lblNamearticle.Name = "lblNamearticle";
+            this.lblNamearticle.Size = new System.Drawing.Size(151, 28);
+            this.lblNamearticle.TabIndex = 96;
+            this.lblNamearticle.Text = "Nom de l\'article";
             // 
             // lblMenu
             // 
@@ -179,95 +157,128 @@
             this.label1.Size = new System.Drawing.Size(801, 5);
             this.label1.TabIndex = 93;
             // 
-            // dtmpMouvement
-            // 
-            this.dtmpMouvement.Location = new System.Drawing.Point(351, 145);
-            this.dtmpMouvement.Name = "dtmpMouvement";
-            this.dtmpMouvement.Size = new System.Drawing.Size(249, 23);
-            this.dtmpMouvement.TabIndex = 114;
-            // 
-            // rdbtnEntry
-            // 
-            this.rdbtnEntry.AutoSize = true;
-            this.rdbtnEntry.Location = new System.Drawing.Point(351, 299);
-            this.rdbtnEntry.Name = "rdbtnEntry";
-            this.rdbtnEntry.Size = new System.Drawing.Size(58, 19);
-            this.rdbtnEntry.TabIndex = 115;
-            this.rdbtnEntry.TabStop = true;
-            this.rdbtnEntry.Text = "Entrée";
-            this.rdbtnEntry.UseVisualStyleBackColor = true;
-            // 
             // rdbtnExit
             // 
             this.rdbtnExit.AutoSize = true;
-            this.rdbtnExit.Location = new System.Drawing.Point(545, 299);
+            this.rdbtnExit.Location = new System.Drawing.Point(539, 378);
             this.rdbtnExit.Name = "rdbtnExit";
             this.rdbtnExit.Size = new System.Drawing.Size(55, 19);
-            this.rdbtnExit.TabIndex = 116;
+            this.rdbtnExit.TabIndex = 124;
             this.rdbtnExit.TabStop = true;
             this.rdbtnExit.Text = "Sortie";
             this.rdbtnExit.UseVisualStyleBackColor = true;
             // 
-            // btnvalidnewMouvement
+            // rdbtnEntry
             // 
-            this.btnvalidnewMouvement.Location = new System.Drawing.Point(497, 342);
-            this.btnvalidnewMouvement.Name = "btnvalidnewMouvement";
-            this.btnvalidnewMouvement.Size = new System.Drawing.Size(103, 41);
-            this.btnvalidnewMouvement.TabIndex = 117;
-            this.btnvalidnewMouvement.Text = "Valider";
-            this.btnvalidnewMouvement.UseVisualStyleBackColor = true;
-            this.btnvalidnewMouvement.Click += new System.EventHandler(this.btnvalidnewMouvement_Click);
+            this.rdbtnEntry.AutoSize = true;
+            this.rdbtnEntry.Location = new System.Drawing.Point(345, 378);
+            this.rdbtnEntry.Name = "rdbtnEntry";
+            this.rdbtnEntry.Size = new System.Drawing.Size(58, 19);
+            this.rdbtnEntry.TabIndex = 123;
+            this.rdbtnEntry.TabStop = true;
+            this.rdbtnEntry.Text = "Entrée";
+            this.rdbtnEntry.UseVisualStyleBackColor = true;
             // 
-            // ViewnewMouvement
+            // LblDatetime
+            // 
+            this.LblDatetime.AutoSize = true;
+            this.LblDatetime.Location = new System.Drawing.Point(345, 149);
+            this.LblDatetime.Name = "LblDatetime";
+            this.LblDatetime.Size = new System.Drawing.Size(31, 15);
+            this.LblDatetime.TabIndex = 120;
+            this.LblDatetime.Text = "Date";
+            // 
+            // lblArticle
+            // 
+            this.lblArticle.AutoSize = true;
+            this.lblArticle.Location = new System.Drawing.Point(345, 303);
+            this.lblArticle.Name = "lblArticle";
+            this.lblArticle.Size = new System.Drawing.Size(41, 15);
+            this.lblArticle.TabIndex = 119;
+            this.lblArticle.Text = "Article";
+            // 
+            // lblHowmany
+            // 
+            this.lblHowmany.AutoSize = true;
+            this.lblHowmany.Location = new System.Drawing.Point(345, 228);
+            this.lblHowmany.Name = "lblHowmany";
+            this.lblHowmany.Size = new System.Drawing.Size(53, 15);
+            this.lblHowmany.TabIndex = 118;
+            this.lblHowmany.Text = "Quantité";
+            // 
+            // txtboxHowmany
+            // 
+            this.txtboxHowmany.Location = new System.Drawing.Point(345, 246);
+            this.txtboxHowmany.Name = "txtboxHowmany";
+            this.txtboxHowmany.Size = new System.Drawing.Size(249, 23);
+            this.txtboxHowmany.TabIndex = 117;
+            // 
+            // txtboxArticle
+            // 
+            this.txtboxArticle.Location = new System.Drawing.Point(345, 321);
+            this.txtboxArticle.Name = "txtboxArticle";
+            this.txtboxArticle.Size = new System.Drawing.Size(249, 23);
+            this.txtboxArticle.TabIndex = 125;
+            // 
+            // txtboxDate
+            // 
+            this.txtboxDate.Location = new System.Drawing.Point(345, 167);
+            this.txtboxDate.Name = "txtboxDate";
+            this.txtboxDate.Size = new System.Drawing.Size(249, 23);
+            this.txtboxDate.TabIndex = 126;
+            // 
+            // ViewoneMouvement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnvalidnewMouvement);
+            this.Controls.Add(this.txtboxDate);
+            this.Controls.Add(this.txtboxArticle);
             this.Controls.Add(this.rdbtnExit);
             this.Controls.Add(this.rdbtnEntry);
-            this.Controls.Add(this.dtmpMouvement);
-            this.Controls.Add(this.cmboxArticle);
             this.Controls.Add(this.LblDatetime);
             this.Controls.Add(this.lblArticle);
             this.Controls.Add(this.lblHowmany);
             this.Controls.Add(this.txtboxHowmany);
+            this.Controls.Add(this.LblNamefirstname);
+            this.Controls.Add(this.txtboxNamefirstname);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnAccount);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnArticle);
             this.Controls.Add(this.btnDashboard);
-            this.Controls.Add(this.lblNewMouvement);
+            this.Controls.Add(this.lblNamearticle);
             this.Controls.Add(this.lblMenu);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "ViewnewMouvement";
+            this.Name = "ViewoneMouvement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ViewnewMouvement";
-            this.Activated += new System.EventHandler(this.ViewnewMouvement_Activated);
+            this.Text = "ViewoneMouvement";
+            this.Activated += new System.EventHandler(this.ViewoneMouvement_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private ComboBox cmboxArticle;
-        private Label LblDatetime;
-        private Label lblArticle;
-        private Label lblHowmany;
-        private TextBox txtboxHowmany;
+        private Label LblNamefirstname;
+        private TextBox txtboxNamefirstname;
         private Button btnLogOut;
         private Button btnAccount;
         private Button btnBack;
         private Button btnArticle;
         private Button btnDashboard;
-        private Label lblNewMouvement;
+        private Label lblNamearticle;
         private Label lblMenu;
         private Label label2;
         private Label label1;
-        private DateTimePicker dtmpMouvement;
-        private RadioButton rdbtnEntry;
         private RadioButton rdbtnExit;
-        private Button btnvalidnewMouvement;
+        private RadioButton rdbtnEntry;
+        private Label LblDatetime;
+        private Label lblArticle;
+        private Label lblHowmany;
+        private TextBox txtboxHowmany;
+        private TextBox txtboxArticle;
+        private TextBox txtboxDate;
     }
 }

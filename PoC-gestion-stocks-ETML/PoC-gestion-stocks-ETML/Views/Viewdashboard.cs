@@ -33,7 +33,7 @@ namespace PoC_gestion_stocks_ETML.Views
             // Afficher la vue du compte utilisateur
             Controller.changeView("Viewarticle");
         }
-
+        
         private void btnMouvement_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -53,5 +53,39 @@ namespace PoC_gestion_stocks_ETML.Views
             Controller.changeView("View");
             this.Hide();
         }
+
+        private void Viewdashboard_Activated(object sender, EventArgs e)
+        {
+            
+            lblTotalstock.Text = "Total Stock : ";
+            lblNumbercriticArticle.Text = "Nombre d'articles critiques : ";
+            
+
+
+            int totalArticle = 0;
+            int articleCritical = 3;
+            int articleTotal = 0;
+
+            for (int i = 0; i < Controller.TransferarticleData().GetLength(0); i++)
+            {
+                totalArticle += Convert.ToInt32(Controller.TransferarticleData()[i, 3]);
+
+                articleTotal = Convert.ToInt32(Controller.TransferarticleData()[i, 3]);
+
+                if (articleTotal < articleCritical)
+                {
+                    articleTotal++;
+                }
+            }
+
+            lblTotalstock.Text += " " + Convert.ToString(totalArticle);
+
+            lblNumbercriticArticle.Text += " " + Convert.ToString(articleTotal);
+
+            Controller.SetMouvementTable();
+            Controller.AfficherPageMouvementinDashboard(FindForm(), pnlLastmouvementinDashboard);
+
+        }
+
     }
 }

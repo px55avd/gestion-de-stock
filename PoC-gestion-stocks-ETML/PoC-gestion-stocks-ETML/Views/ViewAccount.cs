@@ -35,7 +35,7 @@ namespace PoC_gestion_stocks_ETML.Views
         private void btnDeleteUser_Click(object sender, EventArgs e)
         {
             //
-            Controller.Deletedata(Controller.SetcurrentUser()[0]);
+            Controller.DeleteUserdata(Controller.SetcurrentUser()[0]);
             this.Hide();
             Controller.changeView("View");
         }

@@ -20,18 +20,29 @@ namespace PoC_gestion_stocks_ETML.Controller
         private ViewoneArticle _viewoneArticle;
         private ViewnewUser _viewnewUser;
         private ViewnewMouvement _viewnewMouvement;
+        private ViewoneMouvement _viewoneMouvement;
 
         // Référence au modèle utilisé par le contrôleur.
         private Model.Model _model;
 
         //Variable privée
-
-
         private string[] _currentUser = new string[6];
         private string[] _currentarticle = new string[6];
+        private string[] _currentMouvemnt = new string[6];
 
-        public Controller(View view, Model.Model model,  Viewdashboard viewdashborad, Viewarticle viewarticle, ViewMouvement viewmouvement,
-            ViewnewArticle viewnewArticle, ViewAccount viewaccount, ViewoneArticle viewoneArticle, ViewnewUser viewnewUser, ViewnewMouvement viewnewMouvement)
+
+        // Variables globales pour la pagination
+        private int _pageActuelle = 0;
+        private const int _mouvementsParPage = 10; // Nombre total d’articles par page
+        private const int _colonnes = 2; // Nombre de colonnes
+        private const int _espaceX = 210, espaceY = 50; // Espacement des boutons
+        private string[,] _mouvements; // Stocke les articles
+
+        private const int _articlesParPage = 10; // Nombre total d’articles par page
+        private string[,] _articles; // Stocke les articles
+
+        public Controller(View view, Model.Model model, Viewdashboard viewdashborad, Viewarticle viewarticle, ViewMouvement viewmouvement,
+            ViewnewArticle viewnewArticle, ViewAccount viewaccount, ViewoneArticle viewoneArticle, ViewnewUser viewnewUser, ViewnewMouvement viewnewMouvement, ViewoneMouvement viewoneMouvement)
         {
             // Initialisation des références aux vues et au modèle.
             _model = model;
@@ -61,11 +72,13 @@ namespace PoC_gestion_stocks_ETML.Controller
 
             _viewnewUser = viewnewUser;
             _viewnewUser.Controller = this;
-            
+
             _viewnewMouvement = viewnewMouvement;
             _viewnewMouvement.Controller = this;
 
-            
+            _viewoneMouvement = viewoneMouvement;
+            _viewoneMouvement.Controller = this;
+
         }
 
         public void changeView(string nameview)
@@ -85,7 +98,7 @@ namespace PoC_gestion_stocks_ETML.Controller
             else if (nameview == "Viewdashboard")
             {
                 _viewDashboard.Show();
-            } 
+            }
             else if (nameview == "ViewMouvement")
             {
                 _viewmouvement.Show();
@@ -97,13 +110,18 @@ namespace PoC_gestion_stocks_ETML.Controller
             else if (nameview == "ViewnewMouvement")
             {
                 _viewnewMouvement.Show();
-            }else if (nameview == "ViewnewUser")
+            }
+            else if (nameview == "ViewnewUser")
             {
                 _viewnewUser.Show();
             }
             else if (nameview == "ViewoneArticle")
             {
                 _viewoneArticle.Show();
+            }
+            else if (nameview == "ViewoneMouvement")
+            {
+                _viewoneMouvement.Show();
             }
 
 
@@ -145,23 +163,48 @@ namespace PoC_gestion_stocks_ETML.Controller
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string[,] TransfermouvementData()
+        {
+            return _model.GetMouvementData();
+
+        }
+
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="name"></param>
         /// <param name="firstname"></param>
-        /// <param name="address"></param>
+        /// <param name="name"></param>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <param name="role"></param>
         public void IntergerdataUser(string firstname, string name, string login, string password, int role)
         {
             _model.SaveNewuser(firstname, name, login, password, role);
         }
 
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="quantity"></param>
+        /// <param name="unitPrice"></param>
+        /// <param name="categoryID"></param>
         public void IntergerdataArticle(string name, string description, string quantity, string unitPrice, string categoryID)
         {
             _model.SaveNewArticle(name, description, quantity, unitPrice, categoryID);
         }
-        
+
+
+        public void IntergerdataMouvement(string Mouvementdatetime, string Mouvementtype, string Mouvementquantity, string MouvementUserID, string MouvementArticleID)
+        {
+            _model.SaveNewMouvement(Mouvementdatetime, Mouvementtype, Mouvementquantity, MouvementUserID, MouvementArticleID);
+        }
+
 
         /// <summary>
         /// /
@@ -177,11 +220,19 @@ namespace PoC_gestion_stocks_ETML.Controller
 
         }
 
+        public void UpdatedataArticlequantity(string id, string quantity)
+        {
+            _model.updateArticleqiuantity(id, quantity);
+
+
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
-        public void Deletedata(string id)
+        public void DeleteUserdata(string id)
         {
             _model.DeleteUser(id);
         }
@@ -196,7 +247,7 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// <param name="currrentUserlogin"></param>
         /// <param name="currrentUserPaswword"></param>
         /// <param name="currrentUserrole"></param>
-        public void Getcurrentuser(string currrentUserindex, string currrentUserfirstname ,string currrentUserName   ,string currrentUserlogin ,string currrentUserPaswword ,string currrentUserrole)
+        public void Getcurrentuser(string currrentUserindex, string currrentUserfirstname, string currrentUserName, string currrentUserlogin, string currrentUserPaswword, string currrentUserrole)
         {
 
             _currentUser[0] = currrentUserindex;
@@ -221,6 +272,19 @@ namespace PoC_gestion_stocks_ETML.Controller
         }
 
 
+        public void GetcurrentMouvment(string currrentMouvementindex, string currrentMouvementdatetime, string currrentMouvementtype, string currrentMouvementquantity, string currrentMouvementUser, string currrentMouvementArticle)
+        {
+
+            _currentMouvemnt[0] = currrentMouvementindex;
+            _currentMouvemnt[1] = currrentMouvementdatetime;
+            _currentMouvemnt[2] = currrentMouvementtype;
+            _currentMouvemnt[3] = currrentMouvementquantity;
+            _currentMouvemnt[4] = currrentMouvementUser;
+            _currentMouvemnt[5] = currrentMouvementArticle;
+
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -241,6 +305,201 @@ namespace PoC_gestion_stocks_ETML.Controller
             return _currentarticle;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string[] SetcurrentMouvement()
+        {
+            //
+            return _currentMouvemnt;
+        }
+
+
+        public void AfficherPageMouvement(int page, Form form, Panel pnl)
+        {
+            pnl.Controls.Clear(); // Efface les anciens boutons
+
+            int nbArticles = _mouvements.GetLength(0);
+            int debut = page * _mouvementsParPage;
+            int fin = Math.Min(debut + _mouvementsParPage, nbArticles);
+
+            for (int i = debut; i < fin; i++)
+            {
+                string mouvementName = "";
+
+                mouvementName += $"{_mouvements[i, 3]}";
+
+                for (int j = 0; j < TransferarticleData().GetLength(0); j++)
+                {
+                    if (_mouvements[i, 5] == TransferarticleData()[j, 0])
+                    {
+                        mouvementName += " " + TransferarticleData()[j, 1]; // Nom de l'article
+                    }
+                }
+
+
+                if (Convert.ToBoolean(_mouvements[i, 2]) == true)
+                {
+                    mouvementName += ", Entrée"; //type
+                }
+                else if (Convert.ToBoolean(_mouvements[i, 2]) == false)
+                {
+                    mouvementName += ", Sortie"; //type
+                }
+
+
+                mouvementName += $", {Convert.ToDateTime(_mouvements[i, 1]).ToString("dd.MM.yyyy")}"; //date
+
+                Button btn = new Button();
+                btn.Text = mouvementName;
+                btn.Size = new Size(200, 40);
+
+                int colonne = (i - debut) % _colonnes;
+                int ligne = (i - debut) / _colonnes;
+
+                btn.Location = new Point(10 + colonne * _espaceX, 10 + ligne * espaceY);
+
+                // Événement du bouton pour récupérer les infos de l'article
+                int index = i; // Sauvegarde l'index pour récupérer l'article
+                btn.Click += (s, args) => GetcurrentMouvment(_mouvements[index, 0], _mouvements[index, 1], _mouvements[index, 2], _mouvements[index, 3], _mouvements[index, 4], _mouvements[index, 5]);
+                btn.Click += (s, args) => form.Hide();
+                btn.Click += (s, args) => changeView("ViewoneMouvement");
+
+
+                pnl.Controls.Add(btn);
+            }
+
+        }
+
+        public void AfficherPageArticle(int page, Form form, Panel pnl)
+        {
+            pnl.Controls.Clear(); // Efface les anciens boutons
+
+            int nbArticles = _articles.GetLength(0);
+            int debut = page * _articlesParPage;
+            int fin = Math.Min(debut + _articlesParPage, nbArticles);
+
+            for (int i = debut; i < fin; i++)
+            {
+                string articleName = _articles[i, 1]; // Nom de l'article
+
+                Button btn = new Button();
+                btn.Text = articleName;
+                btn.Size = new Size(200, 40);
+
+                int colonne = (i - debut) % _colonnes;
+                int ligne = (i - debut) / _colonnes;
+
+                btn.Location = new Point(10 + colonne * _espaceX, 10 + ligne * espaceY);
+
+                // Événement du bouton pour récupérer les infos de l'article
+                int index = i; // Sauvegarde l'index pour récupérer l'article
+                btn.Click += (s, args) => Getcurrentarticle(_articles[index, 0], _articles[index, 1], _articles[index, 2], _articles[index, 3], _articles[index, 4], _articles[index, 5]);
+                btn.Click += (s, args) => form.Hide();
+                btn.Click += (s, args) => changeView("ViewoneArticle");
+
+
+
+                pnl.Controls.Add(btn);
+            }
+        }
+
+        public void AfficherPageMouvementinDashboard(Form form, Panel pnl)
+        {
+            pnl.Controls.Clear(); // Efface les anciens boutons
+
+            int nbArticles = _mouvements.GetLength(0);
+            int debut = 0;
+            int fin = 6;
+
+            for (int i = debut; i < fin; i++)
+            {
+                string mouvementName = "";
+
+                mouvementName += $"{_mouvements[i, 3]}";
+
+                for (int j = 0; j < TransferarticleData().GetLength(0); j++)
+                {
+                    if (_mouvements[i, 5] == TransferarticleData()[j, 0])
+                    {
+                        mouvementName += " " + TransferarticleData()[j, 1]; // Nom de l'article
+                    }
+                }
+
+
+                if (Convert.ToBoolean(_mouvements[i, 2]) == true)
+                {
+                    mouvementName += ", Entrée"; //type
+                }
+                else if (Convert.ToBoolean(_mouvements[i, 2]) == false)
+                {
+                    mouvementName += ", Sortie"; //type
+                }
+
+
+                mouvementName += $", {Convert.ToDateTime(_mouvements[i, 1]).ToString("dd.MM.yyyy")}"; //date
+
+                Button btn = new Button();
+                btn.Text = mouvementName;
+                btn.Size = new Size(200, 40);
+
+                int colonne = (i - debut) % _colonnes;
+                int ligne = (i - debut) / _colonnes;
+
+                btn.Location = new Point(10 + colonne * _espaceX, 10 + ligne * espaceY);
+
+                // Événement du bouton pour récupérer les infos de l'article
+                int index = i; // Sauvegarde l'index pour récupérer l'article
+                btn.Click += (s, args) => GetcurrentMouvment(_mouvements[index, 0], _mouvements[index, 1], _mouvements[index, 2], _mouvements[index, 3], _mouvements[index, 4], _mouvements[index, 5]);
+                btn.Click += (s, args) => form.Hide();
+                btn.Click += (s, args) => changeView("ViewoneMouvement");
+
+
+                pnl.Controls.Add(btn);
+            }
+        }
+
+        public int Getnumberofpage()
+        {
+            return _pageActuelle;
+        }
+
+        public int GetnumberofmouvementBypage()
+        {
+            return _mouvementsParPage;
+        }
+
+        public int GetnumberofarticleBypage()
+        {
+            return _articlesParPage;
+        }
+
+        public void Plusnumberofpage()
+        {
+            _pageActuelle++;
+        }
+
+        public void Minusnumberofpage()
+        {
+            _pageActuelle--;
+        }
+
+        public void Resetnumberofpage()
+        {
+            _pageActuelle = 0;
+        }
+
+
+        public void SetMouvementTable()
+        {
+            _mouvements = TransfermouvementData(); ;
+        }
+
+        public void SetarticleTable()
+        {
+            _articles = TransferarticleData(); ;
+        }
 
 
     }

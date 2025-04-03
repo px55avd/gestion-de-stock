@@ -71,6 +71,8 @@ namespace PoC_gestion_stocks_ETML.Views
             txtboxPrice.Text = "";
             cmboxCategory.Items.Clear();
 
+
+            lblNamearticle.Text = Controller.SetcurrentArticle()[1];
             txtboxName.Text = Controller.SetcurrentArticle()[1];
             txtboxDescription.Text = Controller.SetcurrentArticle()[2];
             txtboxHowmany.Text = Controller.SetcurrentArticle()[3];
@@ -87,6 +89,8 @@ namespace PoC_gestion_stocks_ETML.Views
                     cmboxCategory.Items.Add(Controller.TransfercategoryData()[i, 1]);
                 }
             }
+
+            txtboxHowmany.Enabled = false;
 
         }
     }

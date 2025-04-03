@@ -19,9 +19,12 @@ namespace PoC_gestion_stocks_ETML.Model
         // Prepare the connection
         private string myConnectionString = "datasource=localhost;port=6033;username=root;password=root;database=db_gestionStockage;";
         private MySqlConnection myConnection;
+        
+        //VAriable privée
         private int _lineUser;
         private int _lineArticle;
         private int _lineCategory;
+        private int _lineMouvement;
 
 
 
@@ -197,6 +200,54 @@ namespace PoC_gestion_stocks_ETML.Model
             }
 
             _lineCategory = count;
+        }
+
+
+        private void getNumberLineMouvement()
+        {
+            myConnection = new MySqlConnection(myConnectionString);
+
+            string query = "SELECT COUNT(*) FROM t_mouvement";
+
+            MySqlCommand commandDatabase = new MySqlCommand(query, myConnection); ;
+            MySqlDataReader reader;
+
+            //Compteur
+            int count = 0;
+
+            try
+            {
+                // Open the database
+                myConnection.Open();
+
+                // Execute the query
+                reader = commandDatabase.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+
+                    while (reader.Read())
+                    {
+                        count = reader.GetInt32(0);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Pas de colonnes 1");
+                }
+
+                // Finally close the connection     
+                reader.Close();
+                myConnection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                // Show any error message.
+                MessageBox.Show($"Échec de la connexion : {ex.Message}");
+            }
+
+            _lineMouvement = count;
         }
 
 
@@ -511,6 +562,122 @@ namespace PoC_gestion_stocks_ETML.Model
             catch (Exception ex)
             {
                 // Show any error message.
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        public void SaveNewMouvement(string Mouvementdatetime, string Mouvementtype, string Mouvementquantity, string MouvementUserID, string MouvementArticleID)
+        {
+
+            string query = "INSERT INTO t_mouvement(`mouvement_id`, `date`, `type`, `quantité`, `utilisateur_id`,  `article_id`) VALUES (NULL, '" + Mouvementdatetime + "', '" + Mouvementtype + "', '" + Mouvementquantity + "', '" + MouvementUserID + "', '" + MouvementArticleID + "')";
+
+            MySqlConnection databaseConnection = new MySqlConnection(myConnectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
+
+
+            try
+            {
+                databaseConnection.Open();
+
+                reader = commandDatabase.ExecuteReader();
+
+                MessageBox.Show("Mouvement succesfully registered");
+
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                // Show any error message.
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        public string[,] GetMouvementData()
+        {
+            getNumberLineMouvement();
+
+            myConnection = new MySqlConnection(myConnectionString);
+
+            string query = "SELECT * FROM t_mouvement";
+
+            MySqlCommand commandDatabase = new MySqlCommand(query, myConnection);
+
+            MySqlDataReader reader;
+
+            string[,] data = new string[0, 0];
+
+            try
+            {
+                // Open the database
+                myConnection.Open();
+
+                // Execute the query
+                reader = commandDatabase.ExecuteReader();
+
+                data = new string[_lineMouvement, reader.FieldCount];
+
+                //Compteur
+                int count = 0;
+
+                // All succesfully executed, now do something
+
+                if (reader.HasRows)
+                {
+
+                    while (reader.Read())
+                    {
+
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            data[count, i] = reader.GetValue(i).ToString();
+                        }
+
+                        count++;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Pas de colonnes 3");
+                }
+
+                // Finally close the connection     
+                myConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                // Show any error message.
+                MessageBox.Show($"Échec de la connexion 2: {ex.Message}");
+            }
+
+            return data;
+        }
+
+
+        public void updateArticleqiuantity(string id, string quantity)
+        {
+
+            // Update the properties of the row with good id
+            string query = "UPDATE `t_article` SET `quantité`='" + quantity + "' WHERE article_id = " + id + "";
+
+            MySqlConnection databaseConnection = new MySqlConnection(myConnectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+
+                // Succesfully updated
+
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                // Ops, maybe the id doesn't exists ?
                 MessageBox.Show(ex.Message);
             }
         }

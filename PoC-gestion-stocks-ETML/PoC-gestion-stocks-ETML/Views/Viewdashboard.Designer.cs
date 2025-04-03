@@ -40,7 +40,7 @@
             this.lblTotalstock = new System.Windows.Forms.Label();
             this.lblLastmouvement = new System.Windows.Forms.Label();
             this.lblNumbercriticArticle = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlLastmouvementinDashboard = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // label1
@@ -165,19 +165,19 @@
             this.lblNumbercriticArticle.TabIndex = 11;
             this.lblNumbercriticArticle.Text = "Nombre d\'articles critiques :";
             // 
-            // panel1
+            // pnlLastmouvementinDashboard
             // 
-            this.panel1.Location = new System.Drawing.Point(239, 155);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(507, 212);
-            this.panel1.TabIndex = 12;
+            this.pnlLastmouvementinDashboard.Location = new System.Drawing.Point(239, 155);
+            this.pnlLastmouvementinDashboard.Name = "pnlLastmouvementinDashboard";
+            this.pnlLastmouvementinDashboard.Size = new System.Drawing.Size(507, 212);
+            this.pnlLastmouvementinDashboard.TabIndex = 12;
             // 
             // Viewdashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlLastmouvementinDashboard);
             this.Controls.Add(this.lblNumbercriticArticle);
             this.Controls.Add(this.lblLastmouvement);
             this.Controls.Add(this.lblTotalstock);
@@ -193,6 +193,7 @@
             this.Name = "Viewdashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Viewdashborad";
+            this.Activated += new System.EventHandler(this.Viewdashboard_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,6 +213,6 @@
         private Label lblTotalstock;
         private Label lblLastmouvement;
         private Label lblNumbercriticArticle;
-        private Panel panel1;
+        private Panel pnlLastmouvementinDashboard;
     }
 }

@@ -184,7 +184,7 @@
             this.lblNumberpages.Name = "lblNumberpages";
             this.lblNumberpages.Size = new System.Drawing.Size(13, 15);
             this.lblNumberpages.TabIndex = 29;
-            this.lblNumberpages.Text = "1";
+            this.lblNumberpages.Text = "0";
             // 
             // txtboxSearch
             // 

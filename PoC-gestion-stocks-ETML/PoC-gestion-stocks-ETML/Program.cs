@@ -26,11 +26,12 @@ namespace PoC_gestion_stocks_ETML
             ViewoneArticle viewoneArticle = new ViewoneArticle();
             ViewnewUser viewnewUser = new ViewnewUser();
             ViewnewMouvement viewnewMouvement = new ViewnewMouvement();
+            ViewoneMouvement viewoneMouvement = new ViewoneMouvement();
 
             Model.Model model = new Model.Model();
 
             Controller.Controller controller = new Controller.Controller(view, model, viewdashborad, viewarticle, viewMouvement, viewnewArticle, viewAccount, viewoneArticle,
-                viewnewUser, viewnewMouvement);
+                viewnewUser, viewnewMouvement, viewoneMouvement);
 
 
 

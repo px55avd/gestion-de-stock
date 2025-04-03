@@ -34,7 +34,7 @@
             this.btnMibus = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
             this.btnNewMouvement = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlMouvementbutton = new System.Windows.Forms.Panel();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnAccount = new System.Windows.Forms.Button();
             this.btnMouvement = new System.Windows.Forms.Button();
@@ -70,7 +70,7 @@
             this.lblNumberpages.Name = "lblNumberpages";
             this.lblNumberpages.Size = new System.Drawing.Size(13, 15);
             this.lblNumberpages.TabIndex = 45;
-            this.lblNumberpages.Text = "1";
+            this.lblNumberpages.Text = "0";
             // 
             // btnMibus
             // 
@@ -81,6 +81,7 @@
             this.btnMibus.TabIndex = 44;
             this.btnMibus.Text = "-";
             this.btnMibus.UseVisualStyleBackColor = true;
+            this.btnMibus.Click += new System.EventHandler(this.btnMibus_Click);
             // 
             // btnUp
             // 
@@ -91,6 +92,7 @@
             this.btnUp.TabIndex = 43;
             this.btnUp.Text = "+";
             this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
             // btnNewMouvement
             // 
@@ -98,16 +100,16 @@
             this.btnNewMouvement.Name = "btnNewMouvement";
             this.btnNewMouvement.Size = new System.Drawing.Size(127, 23);
             this.btnNewMouvement.TabIndex = 42;
-            this.btnNewMouvement.Text = "Nouvel mouvement";
+            this.btnNewMouvement.Text = "Ajout Mouvement";
             this.btnNewMouvement.UseVisualStyleBackColor = true;
             this.btnNewMouvement.Click += new System.EventHandler(this.btnNewMouvement_Click);
             // 
-            // panel1
+            // pnlMouvementbutton
             // 
-            this.panel1.Location = new System.Drawing.Point(220, 106);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(507, 285);
-            this.panel1.TabIndex = 41;
+            this.pnlMouvementbutton.Location = new System.Drawing.Point(220, 106);
+            this.pnlMouvementbutton.Name = "pnlMouvementbutton";
+            this.pnlMouvementbutton.Size = new System.Drawing.Size(507, 285);
+            this.pnlMouvementbutton.TabIndex = 41;
             // 
             // btnLogOut
             // 
@@ -212,7 +214,7 @@
             this.Controls.Add(this.btnMibus);
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.btnNewMouvement);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlMouvementbutton);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnAccount);
             this.Controls.Add(this.btnMouvement);
@@ -225,6 +227,7 @@
             this.Name = "ViewMouvement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ViewMouvement";
+            this.Activated += new System.EventHandler(this.ViewMouvement_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,7 +241,7 @@
         private Button btnMibus;
         private Button btnUp;
         private Button btnNewMouvement;
-        private Panel panel1;
+        private Panel pnlMouvementbutton;
         private Button btnLogOut;
         private Button btnAccount;
         private Button btnMouvement;
