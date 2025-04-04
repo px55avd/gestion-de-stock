@@ -36,30 +36,27 @@ namespace PoC_gestion_stocks_ETML.Views
         {
             //
             Controller.DeleteUserdata(Controller.SetcurrentUser()[0]);
-            this.Hide();
-            Controller.changeView("View");
+
+            Controller.changeView("View", FindForm());
         }
 
         private void btnMouvement_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("ViewMouvement");
+            Controller.changeView("ViewMouvement", FindForm());
         }
 
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("Viewdashboard");
+            Controller.changeView("Viewdashboard",FindForm());
         }
 
         private void btnArticle_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("Viewarticle");
+            Controller.changeView("Viewarticle", FindForm());
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -71,8 +68,7 @@ namespace PoC_gestion_stocks_ETML.Views
 
 
             // Afficher la vue du compte utilisateur
-            Controller.changeView("View");
-            this.Hide();
+            Controller.changeView("View", FindForm());
         }
     }
 }

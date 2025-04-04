@@ -21,9 +21,8 @@ namespace PoC_gestion_stocks_ETML.Views
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("View");
+            Controller.changeView("View", FindForm());
         }
 
         private void btnvalidnewArticle_Click(object sender, EventArgs e)
@@ -33,10 +32,7 @@ namespace PoC_gestion_stocks_ETML.Views
 
 
             // Afficher la vue du compte utilisateur
-            Controller.changeView("View");
-
-            //Retour à la page de connexion
-            this.Hide();
+            Controller.changeView("View", FindForm());
         }
     }
 }

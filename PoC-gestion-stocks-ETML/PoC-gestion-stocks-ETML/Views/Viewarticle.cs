@@ -21,33 +21,29 @@ namespace PoC_gestion_stocks_ETML.Views
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("Viewdashboard");
+            Controller.changeView("Viewdashboard", FindForm());
         }
 
         private void btnAccount_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("ViewAccount");
+            Controller.changeView("ViewAccount", FindForm());
         }
 
 
         private void btnMouvement_Click(object sender, EventArgs e)
         {
             Controller.Resetnumberofpage();
-
-            this.Hide();
+;
             // Afficher la vue du compte utilisateur
-            Controller.changeView("ViewMouvement");
+            Controller.changeView("ViewMouvement", FindForm());
         }
 
         private void btnNewarticle_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("ViewnewArticle");
+            Controller.changeView("ViewnewArticle", FindForm());
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -58,8 +54,7 @@ namespace PoC_gestion_stocks_ETML.Views
             }
 
             // Afficher la vue du compte utilisateur
-            Controller.changeView("View");
-            this.Hide();
+            Controller.changeView("View", FindForm());
         }
 
         private void Viewarticle_Activated(object sender, EventArgs e)
@@ -72,7 +67,7 @@ namespace PoC_gestion_stocks_ETML.Views
 
         private void btnUp_Click(object sender, EventArgs e)
         {
-            if ((Controller.Getnumberofpage() + 1) * Controller.GetnumberofarticleBypage() < Controller.TransferarticleData().GetLength(0))
+            if ((Controller.Getnumberofpage() + 1) * Controller.GetnumberofarticleBypage() < Controller.GetarticleTable().GetLength(0))
             {
                 Controller.Plusnumberofpage();
                 lblNumberpages.Text = Convert.ToString(Controller.Getnumberofpage());

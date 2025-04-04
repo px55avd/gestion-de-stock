@@ -60,6 +60,9 @@ namespace PoC_gestion_stocks_ETML.Model
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void getNumberLineUser()
         {
             myConnection = new MySqlConnection(myConnectionString);
@@ -107,7 +110,9 @@ namespace PoC_gestion_stocks_ETML.Model
             _lineUser = count;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         private void getNumberLineArticle()
         {
             myConnection = new MySqlConnection(myConnectionString);
@@ -202,7 +207,9 @@ namespace PoC_gestion_stocks_ETML.Model
             _lineCategory = count;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         private void getNumberLineMouvement()
         {
             myConnection = new MySqlConnection(myConnectionString);
@@ -249,7 +256,6 @@ namespace PoC_gestion_stocks_ETML.Model
 
             _lineMouvement = count;
         }
-
 
         /// <summary>
         /// 
@@ -360,7 +366,7 @@ namespace PoC_gestion_stocks_ETML.Model
         {
             
             // Update the properties of the row with good id
-            string query = "UPDATE `t_utilisateur` SET `useFirstname`='" + firstname + "',`useLastname`='" + name + "',`useAddress`='" + address + "' WHERE id = " + id + "";
+            string query = "UPDATE `t_utilisateur` SET `useFirstname`='" + firstname + "',`useLastname`='" + name + "',`useAddress`='" + address + "' WHERE article_id = " + id + "";
 
             MySqlConnection databaseConnection = new MySqlConnection(myConnectionString);
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
@@ -479,7 +485,10 @@ namespace PoC_gestion_stocks_ETML.Model
             return data;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string[,] GetcategoryData()
         {
             getNumberLineCategory();
@@ -538,7 +547,14 @@ namespace PoC_gestion_stocks_ETML.Model
             return data;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="quantity"></param>
+        /// <param name="unitPrice"></param>
+        /// <param name="categoryID"></param>
         public void SaveNewArticle(string name, string description, string quantity, string unitPrice, string categoryID)
         {
 
@@ -566,7 +582,14 @@ namespace PoC_gestion_stocks_ETML.Model
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Mouvementdatetime"></param>
+        /// <param name="Mouvementtype"></param>
+        /// <param name="Mouvementquantity"></param>
+        /// <param name="MouvementUserID"></param>
+        /// <param name="MouvementArticleID"></param>
         public void SaveNewMouvement(string Mouvementdatetime, string Mouvementtype, string Mouvementquantity, string MouvementUserID, string MouvementArticleID)
         {
 
@@ -594,7 +617,10 @@ namespace PoC_gestion_stocks_ETML.Model
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string[,] GetMouvementData()
         {
             getNumberLineMouvement();
@@ -655,7 +681,11 @@ namespace PoC_gestion_stocks_ETML.Model
             return data;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="quantity"></param>
         public void updateArticleqiuantity(string id, string quantity)
         {
 
@@ -672,6 +702,41 @@ namespace PoC_gestion_stocks_ETML.Model
                 reader = commandDatabase.ExecuteReader();
 
                 // Succesfully updated
+
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                // Ops, maybe the id doesn't exists ?
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="unitPrice"></param>
+        /// <param name="categoryID"></param>
+        public void updateArticle(string id, string name, string description, string unitPrice, string categoryID)
+        {
+
+            // Update the properties of the row with good id
+            string query = "UPDATE `t_article` SET `nom`='" + name + "',`description`='" + description + "',`prix_unitaire`='" + unitPrice + "',`catégorie_id`='" + categoryID + "' WHERE article_id = " + id + "";
+
+            MySqlConnection databaseConnection = new MySqlConnection(myConnectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+
+                // Succesfully updated
+                
 
                 databaseConnection.Close();
             }

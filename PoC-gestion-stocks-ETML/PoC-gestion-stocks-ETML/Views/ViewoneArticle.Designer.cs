@@ -232,6 +232,7 @@
             this.btnUpdatearticle.TabIndex = 92;
             this.btnUpdatearticle.Text = "Modifier";
             this.btnUpdatearticle.UseVisualStyleBackColor = true;
+            this.btnUpdatearticle.Click += new System.EventHandler(this.btnUpdatearticle_Click);
             // 
             // btnDeletearticle
             // 

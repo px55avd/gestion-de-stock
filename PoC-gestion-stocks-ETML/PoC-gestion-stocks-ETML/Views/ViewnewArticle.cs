@@ -21,31 +21,26 @@ namespace PoC_gestion_stocks_ETML.Views
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("Viewdashboard");
+            Controller.changeView("Viewdashboard", FindForm());
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("Viewarticle");
+            Controller.changeView("Viewarticle", FindForm());
         }
 
         private void btnAccount_Click(object sender, EventArgs e)
         {
-
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("ViewAccount");
+            Controller.changeView("ViewAccount",FindForm());
         }
 
         private void btnMouvement_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("ViewMouvement");
+            Controller.changeView("ViewMouvement", FindForm());
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -55,10 +50,8 @@ namespace PoC_gestion_stocks_ETML.Views
                 Controller.SetcurrentUser()[i] = "";
             }
 
-
             // Afficher la vue du compte utilisateur
-            Controller.changeView("View");
-            this.Hide();
+            Controller.changeView("View", FindForm());
         }
 
         private void ViewnewArticle_Activated(object sender, EventArgs e)
@@ -84,11 +77,11 @@ namespace PoC_gestion_stocks_ETML.Views
                     else
                     {
                         Controller.IntergerdataArticle(txtboxName.Text, txtboxDescription.Text, txtboxHowmany.Text, txtboxPrice.Text, Controller.TransfercategoryData()[i, 0]);
+                        
                         cmboxCategory.Items.Clear();
 
-                        this.Hide();
                         // Afficher la vue du compte utilisateur
-                        Controller.changeView("Viewarticle");
+                        Controller.changeView("Viewarticle", FindForm());
                     }
                 }
 

@@ -21,24 +21,20 @@ namespace PoC_gestion_stocks_ETML.Views
 
         private void btnAccount_Click(object sender, EventArgs e)
         {
-
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("ViewAccount");
+            Controller.changeView("ViewAccount", FindForm());
         }
 
         private void btnArticle_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("Viewarticle");
+            Controller.changeView("Viewarticle", FindForm());
         }
         
         private void btnMouvement_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("ViewMouvement");
+            Controller.changeView("ViewMouvement", this);
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -48,10 +44,8 @@ namespace PoC_gestion_stocks_ETML.Views
                 Controller.SetcurrentUser()[i] = "";
             }
 
-
             // Afficher la vue du compte utilisateur
-            Controller.changeView("View");
-            this.Hide();
+            Controller.changeView("View", FindForm());
         }
 
         private void Viewdashboard_Activated(object sender, EventArgs e)
@@ -59,28 +53,11 @@ namespace PoC_gestion_stocks_ETML.Views
             
             lblTotalstock.Text = "Total Stock : ";
             lblNumbercriticArticle.Text = "Nombre d'articles critiques : ";
+
             
+            lblTotalstock.Text += " " + Convert.ToString(Controller.GettotalArticle());
 
-
-            int totalArticle = 0;
-            int articleCritical = 3;
-            int articleTotal = 0;
-
-            for (int i = 0; i < Controller.TransferarticleData().GetLength(0); i++)
-            {
-                totalArticle += Convert.ToInt32(Controller.TransferarticleData()[i, 3]);
-
-                articleTotal = Convert.ToInt32(Controller.TransferarticleData()[i, 3]);
-
-                if (articleTotal < articleCritical)
-                {
-                    articleTotal++;
-                }
-            }
-
-            lblTotalstock.Text += " " + Convert.ToString(totalArticle);
-
-            lblNumbercriticArticle.Text += " " + Convert.ToString(articleTotal);
+            lblNumbercriticArticle.Text += " " + Convert.ToString(Controller.GetcriticalArticle());
 
             Controller.SetMouvementTable();
             Controller.AfficherPageMouvementinDashboard(FindForm(), pnlLastmouvementinDashboard);

@@ -30,6 +30,11 @@ namespace PoC_gestion_stocks_ETML.Controller
         private string[] _currentarticle = new string[6];
         private string[] _currentMouvemnt = new string[6];
 
+        private int _totalArticle = 0;
+        private int _articleCritical = 3;
+        private int _article = 0;
+        private int _criticalAriclecount = 0;
+
 
         // Variables globales pour la pagination
         private int _pageActuelle = 0;
@@ -41,6 +46,20 @@ namespace PoC_gestion_stocks_ETML.Controller
         private const int _articlesParPage = 10; // Nombre total d’articles par page
         private string[,] _articles; // Stocke les articles
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="model"></param>
+        /// <param name="viewdashborad"></param>
+        /// <param name="viewarticle"></param>
+        /// <param name="viewmouvement"></param>
+        /// <param name="viewnewArticle"></param>
+        /// <param name="viewaccount"></param>
+        /// <param name="viewoneArticle"></param>
+        /// <param name="viewnewUser"></param>
+        /// <param name="viewnewMouvement"></param>
+        /// <param name="viewoneMouvement"></param>
         public Controller(View view, Model.Model model, Viewdashboard viewdashborad, Viewarticle viewarticle, ViewMouvement viewmouvement,
             ViewnewArticle viewnewArticle, ViewAccount viewaccount, ViewoneArticle viewoneArticle, ViewnewUser viewnewUser, ViewnewMouvement viewnewMouvement, ViewoneMouvement viewoneMouvement)
         {
@@ -81,50 +100,64 @@ namespace PoC_gestion_stocks_ETML.Controller
 
         }
 
-        public void changeView(string nameview)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nameview"></param>
+        /// <param name="form"></param>
+        public void changeView(string nameview, Form form)
         {
             if (nameview == "View")
-            {
+            {   
+                form.Hide();
                 _view.Show();
             }
             else if (nameview == "ViewAccount")
             {
+                form.Hide();
                 _viewaccount.Show();
             }
             else if (nameview == "Viewarticle")
             {
+                form.Hide();
                 _viewarticle.Show();
             }
             else if (nameview == "Viewdashboard")
             {
+                form.Hide();
                 _viewDashboard.Show();
             }
             else if (nameview == "ViewMouvement")
             {
+                form.Hide();
                 _viewmouvement.Show();
             }
             else if (nameview == "ViewnewArticle")
             {
+                form.Hide();
                 _viewnewArticle.Show();
             }
             else if (nameview == "ViewnewMouvement")
             {
+                form.Hide();
                 _viewnewMouvement.Show();
             }
             else if (nameview == "ViewnewUser")
             {
+                form.Hide();
                 _viewnewUser.Show();
             }
             else if (nameview == "ViewoneArticle")
             {
+                form.Hide();
                 _viewoneArticle.Show();
             }
             else if (nameview == "ViewoneMouvement")
             {
+                form.Hide();
                 _viewoneMouvement.Show();
             }
-
-
         }
 
         /// <summary>
@@ -143,7 +176,6 @@ namespace PoC_gestion_stocks_ETML.Controller
             return _model.GetuserData();
 
         }
-
 
         /// <summary>
         /// 
@@ -172,7 +204,6 @@ namespace PoC_gestion_stocks_ETML.Controller
 
         }
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -199,12 +230,18 @@ namespace PoC_gestion_stocks_ETML.Controller
             _model.SaveNewArticle(name, description, quantity, unitPrice, categoryID);
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Mouvementdatetime"></param>
+        /// <param name="Mouvementtype"></param>
+        /// <param name="Mouvementquantity"></param>
+        /// <param name="MouvementUserID"></param>
+        /// <param name="MouvementArticleID"></param>
         public void IntergerdataMouvement(string Mouvementdatetime, string Mouvementtype, string Mouvementquantity, string MouvementUserID, string MouvementArticleID)
         {
             _model.SaveNewMouvement(Mouvementdatetime, Mouvementtype, Mouvementquantity, MouvementUserID, MouvementArticleID);
         }
-
 
         /// <summary>
         /// /
@@ -220,13 +257,29 @@ namespace PoC_gestion_stocks_ETML.Controller
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="quantity"></param>
         public void UpdatedataArticlequantity(string id, string quantity)
         {
             _model.updateArticleqiuantity(id, quantity);
 
-
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="unitPrice"></param>
+        /// <param name="categoryID"></param>
+        public void Updatearticle(string name, string description, string unitPrice, string categoryID)
+        {
+            _model.updateArticle(SetcurrentArticle()[0], name, description, unitPrice, categoryID);
+        }
 
         /// <summary>
         /// 
@@ -236,7 +289,6 @@ namespace PoC_gestion_stocks_ETML.Controller
         {
             _model.DeleteUser(id);
         }
-
 
         /// <summary>
         /// 
@@ -259,6 +311,15 @@ namespace PoC_gestion_stocks_ETML.Controller
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currrentArtileindex"></param>
+        /// <param name="currrentArticleName"></param>
+        /// <param name="currrentArticledescription"></param>
+        /// <param name="currrentArticlequantity"></param>
+        /// <param name="currrentArticleunitPrice"></param>
+        /// <param name="currrentArticleCatégorie"></param>
         public void Getcurrentarticle(string currrentArtileindex, string currrentArticleName, string currrentArticledescription, string currrentArticlequantity, string currrentArticleunitPrice, string currrentArticleCatégorie)
         {
 
@@ -271,7 +332,15 @@ namespace PoC_gestion_stocks_ETML.Controller
 
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currrentMouvementindex"></param>
+        /// <param name="currrentMouvementdatetime"></param>
+        /// <param name="currrentMouvementtype"></param>
+        /// <param name="currrentMouvementquantity"></param>
+        /// <param name="currrentMouvementUser"></param>
+        /// <param name="currrentMouvementArticle"></param>
         public void GetcurrentMouvment(string currrentMouvementindex, string currrentMouvementdatetime, string currrentMouvementtype, string currrentMouvementquantity, string currrentMouvementUser, string currrentMouvementArticle)
         {
 
@@ -283,7 +352,6 @@ namespace PoC_gestion_stocks_ETML.Controller
             _currentMouvemnt[5] = currrentMouvementArticle;
 
         }
-
 
         /// <summary>
         /// 
@@ -315,10 +383,17 @@ namespace PoC_gestion_stocks_ETML.Controller
             return _currentMouvemnt;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="form"></param>
+        /// <param name="pnl"></param>
         public void AfficherPageMouvement(int page, Form form, Panel pnl)
         {
             pnl.Controls.Clear(); // Efface les anciens boutons
+
+            SetarticleTable();
 
             int nbArticles = _mouvements.GetLength(0);
             int debut = page * _mouvementsParPage;
@@ -330,11 +405,11 @@ namespace PoC_gestion_stocks_ETML.Controller
 
                 mouvementName += $"{_mouvements[i, 3]}";
 
-                for (int j = 0; j < TransferarticleData().GetLength(0); j++)
+                for (int j = 0; j < _articles.GetLength(0); j++)
                 {
-                    if (_mouvements[i, 5] == TransferarticleData()[j, 0])
+                    if (_mouvements[i, 5] == _articles[j, 0])
                     {
-                        mouvementName += " " + TransferarticleData()[j, 1]; // Nom de l'article
+                        mouvementName += " " + _articles[j, 1]; // Nom de l'article
                     }
                 }
 
@@ -364,7 +439,7 @@ namespace PoC_gestion_stocks_ETML.Controller
                 int index = i; // Sauvegarde l'index pour récupérer l'article
                 btn.Click += (s, args) => GetcurrentMouvment(_mouvements[index, 0], _mouvements[index, 1], _mouvements[index, 2], _mouvements[index, 3], _mouvements[index, 4], _mouvements[index, 5]);
                 btn.Click += (s, args) => form.Hide();
-                btn.Click += (s, args) => changeView("ViewoneMouvement");
+                btn.Click += (s, args) => changeView("ViewoneMouvement", form);
 
 
                 pnl.Controls.Add(btn);
@@ -372,6 +447,12 @@ namespace PoC_gestion_stocks_ETML.Controller
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="form"></param>
+        /// <param name="pnl"></param>
         public void AfficherPageArticle(int page, Form form, Panel pnl)
         {
             pnl.Controls.Clear(); // Efface les anciens boutons
@@ -397,7 +478,7 @@ namespace PoC_gestion_stocks_ETML.Controller
                 int index = i; // Sauvegarde l'index pour récupérer l'article
                 btn.Click += (s, args) => Getcurrentarticle(_articles[index, 0], _articles[index, 1], _articles[index, 2], _articles[index, 3], _articles[index, 4], _articles[index, 5]);
                 btn.Click += (s, args) => form.Hide();
-                btn.Click += (s, args) => changeView("ViewoneArticle");
+                btn.Click += (s, args) => changeView("ViewoneArticle", form);
 
 
 
@@ -405,25 +486,33 @@ namespace PoC_gestion_stocks_ETML.Controller
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="form"></param>
+        /// <param name="pnl"></param>
         public void AfficherPageMouvementinDashboard(Form form, Panel pnl)
         {
             pnl.Controls.Clear(); // Efface les anciens boutons
 
-            int nbArticles = _mouvements.GetLength(0);
-            int debut = 0;
-            int fin = 6;
+            SetarticleTable();
 
-            for (int i = debut; i < fin; i++)
+            int nbMouvements = _mouvements.GetLength(0);
+            int nbAffiches = 8; // Par exemple 15 derniers
+            int debut = nbMouvements - 1;
+            int fin = nbMouvements - nbAffiches;
+
+            for (int i = debut; i >= fin; i--)
             {
                 string mouvementName = "";
 
                 mouvementName += $"{_mouvements[i, 3]}";
 
-                for (int j = 0; j < TransferarticleData().GetLength(0); j++)
+                for (int j = 0; j < _articles.GetLength(0); j++)
                 {
-                    if (_mouvements[i, 5] == TransferarticleData()[j, 0])
+                    if (_mouvements[i, 5] == _articles[j, 0])
                     {
-                        mouvementName += " " + TransferarticleData()[j, 1]; // Nom de l'article
+                        mouvementName += " " + _articles[j, 1]; // Nom de l'article
                     }
                 }
 
@@ -444,8 +533,8 @@ namespace PoC_gestion_stocks_ETML.Controller
                 btn.Text = mouvementName;
                 btn.Size = new Size(200, 40);
 
-                int colonne = (i - debut) % _colonnes;
-                int ligne = (i - debut) / _colonnes;
+                int ligne = (debut - i) / _colonnes;
+                int colonne = (debut - i) % _colonnes;
 
                 btn.Location = new Point(10 + colonne * _espaceX, 10 + ligne * espaceY);
 
@@ -453,54 +542,137 @@ namespace PoC_gestion_stocks_ETML.Controller
                 int index = i; // Sauvegarde l'index pour récupérer l'article
                 btn.Click += (s, args) => GetcurrentMouvment(_mouvements[index, 0], _mouvements[index, 1], _mouvements[index, 2], _mouvements[index, 3], _mouvements[index, 4], _mouvements[index, 5]);
                 btn.Click += (s, args) => form.Hide();
-                btn.Click += (s, args) => changeView("ViewoneMouvement");
+                btn.Click += (s, args) => changeView("ViewoneMouvement", form);
 
 
                 pnl.Controls.Add(btn);
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int Getnumberofpage()
         {
             return _pageActuelle;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int GetnumberofmouvementBypage()
         {
             return _mouvementsParPage;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int GetnumberofarticleBypage()
         {
             return _articlesParPage;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Plusnumberofpage()
         {
             _pageActuelle++;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Minusnumberofpage()
         {
             _pageActuelle--;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Resetnumberofpage()
         {
             _pageActuelle = 0;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void SetMouvementTable()
         {
             _mouvements = TransfermouvementData(); ;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void SetarticleTable()
         {
             _articles = TransferarticleData(); ;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string[,] GetMouvementTable()
+        {
+            return _mouvements;
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string[,] GetarticleTable()
+        {
+            return _articles;
+        }
+
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <returns></returns>
+        public int GettotalArticle()
+        {
+       
+            _totalArticle = 0;
+
+            for (int i = 0; i < TransferarticleData().GetLength(0); i++)
+            {
+                _totalArticle += Convert.ToInt32(TransferarticleData()[i, 3]);
+
+            }
+
+            return _totalArticle;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int GetcriticalArticle()
+        {
+            _article = 0;
+            _criticalAriclecount = 0;   
+
+            for (int i = 0; i < TransferarticleData().GetLength(0); i++)
+            {
+                _article = Convert.ToInt32(TransferarticleData()[i, 3]);
+
+                if (_article < _articleCritical)
+                {
+                    _criticalAriclecount++;
+                }
+            }
+
+            return _criticalAriclecount;
+
+        }
     }
 }

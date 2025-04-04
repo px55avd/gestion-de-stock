@@ -21,16 +21,14 @@ namespace PoC_gestion_stocks_ETML.Views
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("Viewdashboard");
+            Controller.changeView("Viewdashboard", FindForm());
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("Viewarticle");
+            Controller.changeView("Viewarticle", FindForm());
         }
 
         private void btnAccount_Click(object sender, EventArgs e)
@@ -38,14 +36,13 @@ namespace PoC_gestion_stocks_ETML.Views
 
             this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("ViewAccount");
+            Controller.changeView("ViewAccount", FindForm());
         }
 
         private void btnMouvement_Click(object sender, EventArgs e)
         {
-            this.Hide();
             // Afficher la vue du compte utilisateur
-            Controller.changeView("ViewMouvement");
+            Controller.changeView("ViewMouvement", FindForm());
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -58,9 +55,7 @@ namespace PoC_gestion_stocks_ETML.Views
 
             
             // Afficher la vue du compte utilisateur
-            Controller.changeView("View");
-            this.Hide();
-
+            Controller.changeView("View", FindForm());
         }
 
         private void ViewoneArticle_Activated(object sender, EventArgs e)
@@ -91,7 +86,30 @@ namespace PoC_gestion_stocks_ETML.Views
             }
 
             txtboxHowmany.Enabled = false;
+        }
 
+        private void btnUpdatearticle_Click(object sender, EventArgs e)
+        {
+            if (lblNamearticle.Text == Controller.SetcurrentArticle()[1] && txtboxName.Text == Controller.SetcurrentArticle()[1] && txtboxDescription.Text == Controller.SetcurrentArticle()[2]
+                && txtboxHowmany.Text == Controller.SetcurrentArticle()[3] && txtboxPrice.Text == Controller.SetcurrentArticle()[4])
+            {
+                MessageBox.Show("Les données n'ont pas été modifiées !!!");
+            }
+            else
+            {
+                for (int i = 0; i < Controller.TransfercategoryData().GetLength(0); i++)
+                {
+                    if (Controller.TransfercategoryData()[i, 1] == cmboxCategory.Text)
+                    {
+                        Controller.Updatearticle(txtboxName.Text, txtboxDescription.Text, txtboxPrice.Text, Controller.TransfercategoryData()[i, 0]);
+
+
+                        MessageBox.Show("Êtes-vous sûr de vouloir modifier cette article ?", "Attention, Modification",MessageBoxButtons.YesNo);
+                        // Afficher la vue du compte utilisateur
+                        Controller.changeView("Viewarticle", FindForm());
+                    }
+                }
+            }
         }
     }
 }

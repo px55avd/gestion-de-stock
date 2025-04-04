@@ -109,6 +109,7 @@
             this.btnAccount.TabIndex = 100;
             this.btnAccount.Text = "Compte";
             this.btnAccount.UseVisualStyleBackColor = true;
+            this.btnAccount.Click += new System.EventHandler(this.btnAccount_Click);
             // 
             // btnBack
             // 
@@ -130,6 +131,7 @@
             this.btnArticle.TabIndex = 98;
             this.btnArticle.Text = "Article";
             this.btnArticle.UseVisualStyleBackColor = true;
+            this.btnArticle.Click += new System.EventHandler(this.btnArticle_Click);
             // 
             // btnDashboard
             // 
@@ -140,6 +142,7 @@
             this.btnDashboard.TabIndex = 97;
             this.btnDashboard.Text = "Dashboard";
             this.btnDashboard.UseVisualStyleBackColor = true;
+            this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
             // lblNewMouvement
             // 

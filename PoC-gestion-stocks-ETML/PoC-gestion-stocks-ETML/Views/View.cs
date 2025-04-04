@@ -27,8 +27,7 @@ namespace PoC_gestion_stocks_ETML
 
         private void btnNewuser_Click(object sender, EventArgs e)
         {
-            Controller.changeView("ViewnewUser");
-            this.Hide();
+            Controller.changeView("ViewnewUser", FindForm());
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -53,20 +52,13 @@ namespace PoC_gestion_stocks_ETML
 
                         Controller.Getcurrentuser(data[i,0], data[i, 1], data[i, 2], data[i, 3], data[i, 4], data[i, 5]);
                         MessageBox.Show("Connexion réussi");
-                        this.Hide();
-                        Controller.changeView("Viewdashboard");
+                        Controller.changeView("Viewdashboard", FindForm());
                     }
                 }
             }
 
             txtboxUsename.Text = "";
             txtboxPassword.Text = "";
-
-        }
-
-        private void btnLogin_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
         }
     }
 }
