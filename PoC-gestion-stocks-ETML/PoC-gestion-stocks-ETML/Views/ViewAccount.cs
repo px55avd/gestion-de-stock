@@ -21,21 +21,38 @@ namespace PoC_gestion_stocks_ETML.Views
 
         private void ViewAccount_Activated(object sender, EventArgs e)
         {
-            txtboxFirstname.Text = Controller.SetcurrentUser()[2];
-            txtboxName.Text = Controller.SetcurrentUser()[1];
-            txtboxLogin.Text = Controller.SetcurrentUser()[3];  
-            txtboxPassword.Text = Controller.SetcurrentUser()[4];
+            txtboxFirstname.Text = Controller.GetcurrentUser()[1];
+            txtboxName.Text = Controller.GetcurrentUser()[2];
+            txtboxLogin.Text = Controller.GetcurrentUser()[3];  
+            txtboxPassword.Text = Controller.GetcurrentUser()[4];
         }
 
         private void btnUpdateuser_Click(object sender, EventArgs e)
         {
+            if (txtboxFirstname.Text == Controller.GetcurrentUser()[1] && txtboxName.Text == Controller.GetcurrentUser()[2] && txtboxLogin.Text == Controller.GetcurrentUser()[3]
+                && txtboxPassword.Text == Controller.GetcurrentUser()[4])
+            {
+                MessageBox.Show("Les données n'ont pas été modifiées !!!");
+            }
+            else
+            {
+                Controller.UpdatedataUser(Controller.GetcurrentUser()[0], txtboxFirstname.Text, txtboxName.Text, txtboxLogin.Text, txtboxPassword.Text);
 
+                Controller.Setcurrentuser(Controller.GetcurrentUser()[0], txtboxFirstname.Text, txtboxName.Text, txtboxLogin.Text, txtboxPassword.Text, Controller.GetcurrentUser()[5]);
+
+                txtboxFirstname.Text = Controller.GetcurrentUser()[1];
+                txtboxName.Text = Controller.GetcurrentUser()[2];
+                txtboxLogin.Text = Controller.GetcurrentUser()[3];
+                txtboxPassword.Text = Controller.GetcurrentUser()[4];
+
+                MessageBox.Show("Êtes-vous sûr de vouloir modifier vos informations ?", "Attention, Modification", MessageBoxButtons.YesNo);
+            }
         }
 
         private void btnDeleteUser_Click(object sender, EventArgs e)
         {
             //
-            Controller.DeleteUserdata(Controller.SetcurrentUser()[0]);
+            Controller.DeleteUserdata(Controller.GetcurrentUser()[0]);
 
             Controller.changeView("View", FindForm());
         }
@@ -45,7 +62,6 @@ namespace PoC_gestion_stocks_ETML.Views
             // Afficher la vue du compte utilisateur
             Controller.changeView("ViewMouvement", FindForm());
         }
-
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
@@ -61,11 +77,10 @@ namespace PoC_gestion_stocks_ETML.Views
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Controller.SetcurrentUser().Length; i++)
+            for (int i = 0; i < Controller.GetcurrentUser().Length; i++)
             {
-                Controller.SetcurrentUser()[i] = "";
+                Controller.GetcurrentUser()[i] = "";
             }
-
 
             // Afficher la vue du compte utilisateur
             Controller.changeView("View", FindForm());

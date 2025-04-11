@@ -47,9 +47,9 @@ namespace PoC_gestion_stocks_ETML.Views
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             //Réinitailise le current user
-            for (int i = 0; i < Controller.SetcurrentUser().Length; i++)
+            for (int i = 0; i < Controller.GetcurrentUser().Length; i++)
             {
-                Controller.SetcurrentUser()[i] = "";
+                Controller.GetcurrentUser()[i] = "";
             }
 
             // Afficher la vue du compte utilisateur
@@ -69,19 +69,19 @@ namespace PoC_gestion_stocks_ETML.Views
 
             for (int i = 0; i < Controller.TransferuserData().GetLength(0); i++)
             {
-                if (Controller.TransferuserData()[i, 0] == Controller.SetcurrentMouvement()[4])
+                if (Controller.TransferuserData()[i, 0] == Controller.GetcurrentMouvement()[4])
                 {
                     txtboxNamefirstname.Text = Controller.TransferuserData()[i, 2] + " " + Controller.TransferuserData()[i, 1];
                 }
             }
 
 
-            txtboxDate.Text = Convert.ToDateTime(Controller.SetcurrentMouvement()[1]).ToString("dd.MM.yyyy");
-            txtboxHowmany.Text = Controller.SetcurrentMouvement()[3];
+            txtboxDate.Text = Convert.ToDateTime(Controller.GetcurrentMouvement()[1]).ToString("dd.MM.yyyy");
+            txtboxHowmany.Text = Controller.GetcurrentMouvement()[3];
 
             for (int i = 0; i < Controller.TransferarticleData().GetLength(0); i++)
             {
-                if (Controller.TransferarticleData()[i, 0] == Controller.SetcurrentMouvement()[4])
+                if (Controller.TransferarticleData()[i, 0] == Controller.GetcurrentMouvement()[4])
                 {
                     txtboxArticle.Text = Controller.TransferarticleData()[i, 1];
                     lblNamearticle.Text = Controller.TransferarticleData()[i, 1];
@@ -89,12 +89,12 @@ namespace PoC_gestion_stocks_ETML.Views
             }
 
 
-            if (Convert.ToBoolean(Controller.SetcurrentMouvement()[2]) == true)
+            if (Convert.ToBoolean(Controller.GetcurrentMouvement()[2]) == true)
             {
                 rdbtnEntry.Checked = true;
                 rdbtnExit.Checked = false;
             }
-            else if (Convert.ToBoolean(Controller.SetcurrentMouvement()[2]) == false)
+            else if (Convert.ToBoolean(Controller.GetcurrentMouvement()[2]) == false)
             {
                 rdbtnEntry.Checked = false;
                 rdbtnExit.Checked = true;

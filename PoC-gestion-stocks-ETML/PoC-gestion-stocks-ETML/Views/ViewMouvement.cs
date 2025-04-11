@@ -40,9 +40,9 @@ namespace PoC_gestion_stocks_ETML.Views
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Controller.SetcurrentUser().Length; i++)
+            for (int i = 0; i < Controller.GetcurrentUser().Length; i++)
             {
-                Controller.SetcurrentUser()[i] = "";
+                Controller.GetcurrentUser()[i] = "";
             }
 
             // Afficher la vue du compte utilisateur
@@ -78,8 +78,70 @@ namespace PoC_gestion_stocks_ETML.Views
         private void ViewMouvement_Activated(object sender, EventArgs e)
         {
             Controller.Resetnumberofpage();
+
+            lblNumberpages.Text = Convert.ToString(Controller.Getnumberofpage());
+
             Controller.SetMouvementTable();
-            Controller.AfficherPageMouvement(Controller.Getnumberofpage(), FindForm(), pnlMouvementbutton );
+
+            Controller.AfficherPageMouvement(Controller.Getnumberofpage(), FindForm(), pnlMouvementbutton);
+
+            cmboxCategory.Items.Clear();
+
+            cmboxCategory.Text = "Toutes Catégories";
+
+            txtboxSearch.Text = "Zone de recherche...";
+
+            for (int i = 0; i < Controller.TransfercategoryData().GetLength(0); i++)
+            {
+                cmboxCategory.Items.Add(Controller.TransfercategoryData()[i, 1]);
+            }
+
+            cmboxCategory.Items.Add("Toutes Catégories");
+
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (txtboxSearch.Text != "Zone de recherche..." && cmboxCategory.Text != "Toutes Catégories")
+            {
+
+                for (int i = 0; i < Controller.TransfercategoryData().GetLength(0); i++)
+                {
+                    if (Controller.TransfercategoryData()[i, 1] == cmboxCategory.Text)
+                    {
+                        Controller.SetMouvementTableFilter(Controller.TransfercategoryData()[i, 0], txtboxSearch.Text);
+                        break;
+                    }
+                }
+            }
+
+            if ((txtboxSearch.Text == "Zone de recherche..." || txtboxSearch.Text.Length == 0) && cmboxCategory.Text != "Toutes Catégories")
+            {
+                for (int i = 0; i < Controller.TransfercategoryData().GetLength(0); i++)
+                {
+                    if (Controller.TransfercategoryData()[i, 1] == cmboxCategory.Text)
+                    {
+                        Controller.SetMouvementTableFilter(Controller.TransfercategoryData()[i, 0], null);
+                        break;
+                    }
+                }
+            }
+
+            if (txtboxSearch.Text != "Zone de recherche..." && cmboxCategory.Text == "Toutes Catégories")
+            {
+                Controller.SetMouvementTableFilter(null, txtboxSearch.Text);
+            }
+
+            if ((txtboxSearch.Text == "Zone de recherche..." || txtboxSearch.Text.Length == 0) && cmboxCategory.Text == "Toutes Catégories")
+            {
+                Controller.SetMouvementTableFilter(null, null);
+            }
+            
+            Controller.Resetnumberofpage();
+
+            lblNumberpages.Text = Convert.ToString(Controller.Getnumberofpage());
+
+            Controller.AfficherPageMouvement(Controller.Getnumberofpage(), this, pnlMouvementbutton);
         }
     }
 }

@@ -50,7 +50,7 @@ namespace PoC_gestion_stocks_ETML
                     if (txtboxUsename.Text == data[i, j] && txtboxPassword.Text == data[i, j+ 1]) 
                     {
 
-                        Controller.Getcurrentuser(data[i,0], data[i, 1], data[i, 2], data[i, 3], data[i, 4], data[i, 5]);
+                        Controller.Setcurrentuser(data[i,0], data[i, 1], data[i, 2], data[i, 3], data[i, 4], data[i, 5]);
                         MessageBox.Show("Connexion réussi");
                         Controller.changeView("Viewdashboard", FindForm());
                     }

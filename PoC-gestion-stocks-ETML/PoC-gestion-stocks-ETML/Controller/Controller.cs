@@ -207,6 +207,18 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="idCategory"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public string[,] TransfermouvementDataFilter(string idCategory, string name)
+        {
+            return _model.GetMouvementDataFilter(idCategory, name);
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="firstname"></param>
         /// <param name="name"></param>
         /// <param name="login"></param>
@@ -250,11 +262,9 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// <param name="firstname"></param>
         /// <param name="name"></param>
         /// <param name="address"></param>
-        public void UpdatedataUser(string id, string firstname, string name, string address)
+        public void UpdatedataUser(string id, string firstname, string name, string login, string password)
         {
-            _model.updateUser(id, firstname, name, address);
-
-
+            _model.updateUser(id, firstname, name, login, password);
         }
 
         /// <summary>
@@ -278,7 +288,7 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// <param name="categoryID"></param>
         public void Updatearticle(string name, string description, string unitPrice, string categoryID)
         {
-            _model.updateArticle(SetcurrentArticle()[0], name, description, unitPrice, categoryID);
+            _model.updateArticle(GetcurrentArticle()[0], name, description, unitPrice, categoryID);
         }
 
         /// <summary>
@@ -299,7 +309,7 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// <param name="currrentUserlogin"></param>
         /// <param name="currrentUserPaswword"></param>
         /// <param name="currrentUserrole"></param>
-        public void Getcurrentuser(string currrentUserindex, string currrentUserfirstname, string currrentUserName, string currrentUserlogin, string currrentUserPaswword, string currrentUserrole)
+        public void Setcurrentuser(string currrentUserindex, string currrentUserfirstname, string currrentUserName, string currrentUserlogin, string currrentUserPaswword, string currrentUserrole)
         {
 
             _currentUser[0] = currrentUserindex;
@@ -320,7 +330,7 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// <param name="currrentArticlequantity"></param>
         /// <param name="currrentArticleunitPrice"></param>
         /// <param name="currrentArticleCatégorie"></param>
-        public void Getcurrentarticle(string currrentArtileindex, string currrentArticleName, string currrentArticledescription, string currrentArticlequantity, string currrentArticleunitPrice, string currrentArticleCatégorie)
+        public void Setcurrentarticle(string currrentArtileindex, string currrentArticleName, string currrentArticledescription, string currrentArticlequantity, string currrentArticleunitPrice, string currrentArticleCatégorie)
         {
 
             _currentarticle[0] = currrentArtileindex;
@@ -341,7 +351,7 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// <param name="currrentMouvementquantity"></param>
         /// <param name="currrentMouvementUser"></param>
         /// <param name="currrentMouvementArticle"></param>
-        public void GetcurrentMouvment(string currrentMouvementindex, string currrentMouvementdatetime, string currrentMouvementtype, string currrentMouvementquantity, string currrentMouvementUser, string currrentMouvementArticle)
+        public void SetcurrentMouvment(string currrentMouvementindex, string currrentMouvementdatetime, string currrentMouvementtype, string currrentMouvementquantity, string currrentMouvementUser, string currrentMouvementArticle)
         {
 
             _currentMouvemnt[0] = currrentMouvementindex;
@@ -357,7 +367,7 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// 
         /// </summary>
         /// <returns></returns>
-        public string[] SetcurrentUser()
+        public string[] GetcurrentUser()
         {
             //
             return _currentUser;
@@ -367,7 +377,7 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// 
         /// </summary>
         /// <returns></returns>
-        public string[] SetcurrentArticle()
+        public string[] GetcurrentArticle()
         {
             //
             return _currentarticle;
@@ -377,7 +387,7 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// 
         /// </summary>
         /// <returns></returns>
-        public string[] SetcurrentMouvement()
+        public string[] GetcurrentMouvement()
         {
             //
             return _currentMouvemnt;
@@ -426,23 +436,26 @@ namespace PoC_gestion_stocks_ETML.Controller
 
                 mouvementName += $", {Convert.ToDateTime(_mouvements[i, 1]).ToString("dd.MM.yyyy")}"; //date
 
-                Button btn = new Button();
-                btn.Text = mouvementName;
-                btn.Size = new Size(200, 40);
+                if (_mouvements[i,0] != null)
+                {
+                    Button btn = new Button();
+                    btn.Text = mouvementName;
+                    btn.Size = new Size(200, 40);
 
-                int colonne = (i - debut) % _colonnes;
-                int ligne = (i - debut) / _colonnes;
+                    int colonne = (i - debut) % _colonnes;
+                    int ligne = (i - debut) / _colonnes;
 
-                btn.Location = new Point(10 + colonne * _espaceX, 10 + ligne * espaceY);
+                    btn.Location = new Point(10 + colonne * _espaceX, 10 + ligne * espaceY);
 
-                // Événement du bouton pour récupérer les infos de l'article
-                int index = i; // Sauvegarde l'index pour récupérer l'article
-                btn.Click += (s, args) => GetcurrentMouvment(_mouvements[index, 0], _mouvements[index, 1], _mouvements[index, 2], _mouvements[index, 3], _mouvements[index, 4], _mouvements[index, 5]);
-                btn.Click += (s, args) => form.Hide();
-                btn.Click += (s, args) => changeView("ViewoneMouvement", form);
+                    // Événement du bouton pour récupérer les infos de l'article
+                    int index = i; // Sauvegarde l'index pour récupérer l'article
+                    btn.Click += (s, args) => SetcurrentMouvment(_mouvements[index, 0], _mouvements[index, 1], _mouvements[index, 2], _mouvements[index, 3], _mouvements[index, 4], _mouvements[index, 5]);
+                    btn.Click += (s, args) => form.Hide();
+                    btn.Click += (s, args) => changeView("ViewoneMouvement", form);
+                    
+                    pnl.Controls.Add(btn);
 
-
-                pnl.Controls.Add(btn);
+                }
             }
 
         }
@@ -476,7 +489,7 @@ namespace PoC_gestion_stocks_ETML.Controller
 
                 // Événement du bouton pour récupérer les infos de l'article
                 int index = i; // Sauvegarde l'index pour récupérer l'article
-                btn.Click += (s, args) => Getcurrentarticle(_articles[index, 0], _articles[index, 1], _articles[index, 2], _articles[index, 3], _articles[index, 4], _articles[index, 5]);
+                btn.Click += (s, args) => Setcurrentarticle(_articles[index, 0], _articles[index, 1], _articles[index, 2], _articles[index, 3], _articles[index, 4], _articles[index, 5]);
                 btn.Click += (s, args) => form.Hide();
                 btn.Click += (s, args) => changeView("ViewoneArticle", form);
 
@@ -540,7 +553,7 @@ namespace PoC_gestion_stocks_ETML.Controller
 
                 // Événement du bouton pour récupérer les infos de l'article
                 int index = i; // Sauvegarde l'index pour récupérer l'article
-                btn.Click += (s, args) => GetcurrentMouvment(_mouvements[index, 0], _mouvements[index, 1], _mouvements[index, 2], _mouvements[index, 3], _mouvements[index, 4], _mouvements[index, 5]);
+                btn.Click += (s, args) => SetcurrentMouvment(_mouvements[index, 0], _mouvements[index, 1], _mouvements[index, 2], _mouvements[index, 3], _mouvements[index, 4], _mouvements[index, 5]);
                 btn.Click += (s, args) => form.Hide();
                 btn.Click += (s, args) => changeView("ViewoneMouvement", form);
 
@@ -605,9 +618,29 @@ namespace PoC_gestion_stocks_ETML.Controller
         /// </summary>
         public void SetMouvementTable()
         {
+            
             _mouvements = TransfermouvementData(); ;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idCategory"></param>
+        /// <param name="name"></param>
+        public void SetMouvementTableFilter(string idCategory, string name)
+        {
+            
+            _mouvements = TransfermouvementDataFilter(idCategory, name);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ResetMouvementTable()
+        {
+            _mouvements = new string[0, 0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>

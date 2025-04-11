@@ -45,9 +45,9 @@ namespace PoC_gestion_stocks_ETML.Views
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Controller.SetcurrentUser().Length; i++)
+            for (int i = 0; i < Controller.GetcurrentUser().Length; i++)
             {
-                Controller.SetcurrentUser()[i] = "";
+                Controller.GetcurrentUser()[i] = "";
             }
 
             // Afficher la vue du compte utilisateur

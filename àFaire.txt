@@ -1,8 +1,9 @@
-modifier un utilisateur
+bouton de recherche pour les articles
 
-Bouton recherche
-filtre avec tag
+hasher les mots de passes
 
 regex pour les champs
+
+commentaires
 
 

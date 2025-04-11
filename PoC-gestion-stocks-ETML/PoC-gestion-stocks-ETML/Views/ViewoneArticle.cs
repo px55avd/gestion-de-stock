@@ -48,9 +48,9 @@ namespace PoC_gestion_stocks_ETML.Views
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             //Réinitailise le current user
-            for (int i = 0; i < Controller.SetcurrentUser().Length; i++)
+            for (int i = 0; i < Controller.GetcurrentUser().Length; i++)
             {
-                Controller.SetcurrentUser()[i] = "";
+                Controller.GetcurrentUser()[i] = "";
             }
 
             
@@ -67,15 +67,15 @@ namespace PoC_gestion_stocks_ETML.Views
             cmboxCategory.Items.Clear();
 
 
-            lblNamearticle.Text = Controller.SetcurrentArticle()[1];
-            txtboxName.Text = Controller.SetcurrentArticle()[1];
-            txtboxDescription.Text = Controller.SetcurrentArticle()[2];
-            txtboxHowmany.Text = Controller.SetcurrentArticle()[3];
-            txtboxPrice.Text = Controller.SetcurrentArticle()[4];
+            lblNamearticle.Text = Controller.GetcurrentArticle()[1];
+            txtboxName.Text = Controller.GetcurrentArticle()[1];
+            txtboxDescription.Text = Controller.GetcurrentArticle()[2];
+            txtboxHowmany.Text = Controller.GetcurrentArticle()[3];
+            txtboxPrice.Text = Controller.GetcurrentArticle()[4];
 
             for (int i = 0; i < Controller.TransfercategoryData().GetLength(0); i++)
             {
-                if (Controller.TransfercategoryData()[i,0] ==Controller.SetcurrentArticle()[5])
+                if (Controller.TransfercategoryData()[i,0] ==Controller.GetcurrentArticle()[5])
                 {
                     cmboxCategory.Text = Controller.TransfercategoryData()[i, 1];
                 }
@@ -90,8 +90,8 @@ namespace PoC_gestion_stocks_ETML.Views
 
         private void btnUpdatearticle_Click(object sender, EventArgs e)
         {
-            if (lblNamearticle.Text == Controller.SetcurrentArticle()[1] && txtboxName.Text == Controller.SetcurrentArticle()[1] && txtboxDescription.Text == Controller.SetcurrentArticle()[2]
-                && txtboxHowmany.Text == Controller.SetcurrentArticle()[3] && txtboxPrice.Text == Controller.SetcurrentArticle()[4])
+            if (lblNamearticle.Text == Controller.GetcurrentArticle()[1] && txtboxName.Text == Controller.GetcurrentArticle()[1] && txtboxDescription.Text == Controller.GetcurrentArticle()[2]
+                && txtboxHowmany.Text == Controller.GetcurrentArticle()[3] && txtboxPrice.Text == Controller.GetcurrentArticle()[4])
             {
                 MessageBox.Show("Les données n'ont pas été modifiées !!!");
             }

@@ -331,7 +331,7 @@ namespace PoC_gestion_stocks_ETML.Model
         public void SaveNewuser(string firstname, string name, string login, string password, int role)
         {
             
-            string query = "INSERT INTO t_utilisateur(`utilisateur_id`, `nom`, `prénom`, `login`, `mot_de_passe`,  `rôle`) VALUES (NULL, '" + firstname + "', '" + name + "', '" + login + "', '" + password + "', '" + role + "')";
+            string query = "INSERT INTO t_utilisateur(`utilisateur_id`, `prénom`, `nom`, `login`, `mot_de_passe`,  `rôle`) VALUES (NULL, '" + firstname + "', '" + name + "', '" + login + "', '" + password + "', '" + role + "')";
 
             MySqlConnection databaseConnection = new MySqlConnection(myConnectionString);
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
@@ -362,11 +362,11 @@ namespace PoC_gestion_stocks_ETML.Model
         /// <param name="firstname"></param>
         /// <param name="name"></param>
         /// <param name="address"></param>
-        public void updateUser(string id, string firstname, string name, string address)
+        public void updateUser(string id, string firstname, string name, string login, string password)
         {
             
             // Update the properties of the row with good id
-            string query = "UPDATE `t_utilisateur` SET `useFirstname`='" + firstname + "',`useLastname`='" + name + "',`useAddress`='" + address + "' WHERE article_id = " + id + "";
+            string query = "UPDATE `t_utilisateur` SET `prénom`='" + firstname + "',`nom`='" + name + "',`login`='" + login + "', `mot_de_passe`='" + password + "' WHERE utilisateur_id = " + id + "";
 
             MySqlConnection databaseConnection = new MySqlConnection(myConnectionString);
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
@@ -667,6 +667,73 @@ namespace PoC_gestion_stocks_ETML.Model
                 else
                 {
                     MessageBox.Show("Pas de colonnes 3");
+                }
+
+                // Finally close the connection     
+                myConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                // Show any error message.
+                MessageBox.Show($"Échec de la connexion 2: {ex.Message}");
+            }
+
+            return data;
+        }
+
+        public string[,] GetMouvementDataFilter(string idCategory, string name)
+        {
+            getNumberLineMouvement();
+
+            myConnection = new MySqlConnection(myConnectionString);
+
+            //string query = "SELECT t_mouvement.* FROM t_mouvement INNER JOIN t_article ON t_article.article_id = t_mouvement.article_id INNER JOIN t_catégorie ON t_article.catégorie_id = t_catégorie.catégorie_id WHERE t_article.nom LIKE @Name AND t_catégorie.catégorie_id = @IdCategory;";
+
+            string query = "SELECT t_mouvement.* FROM t_mouvement INNER JOIN t_article ON t_article.article_id = t_mouvement.article_id " +
+                "INNER JOIN t_catégorie ON t_article.catégorie_id = t_catégorie.catégorie_id WHERE (@Name IS NULL OR t_article.nom LIKE @Name) AND (@IdCategory IS NULL OR t_catégorie.catégorie_id = @IdCategory);";
+
+            MySqlCommand commandDatabase = new MySqlCommand(query, myConnection);
+
+            commandDatabase.Parameters.AddWithValue("@Name", "%" + name + "%");
+            commandDatabase.Parameters.AddWithValue("@IdCategory", idCategory);
+
+
+            MySqlDataReader reader;
+
+            string[,] data = new string[0, 0];
+
+            try
+            {
+                // Open the database
+                myConnection.Open();
+
+                // Execute the query
+                reader = commandDatabase.ExecuteReader();
+
+                data = new string[_lineMouvement, reader.FieldCount];
+
+                //Compteur
+                int count = 0;
+
+                // All succesfully executed, now do something
+
+                if (reader.HasRows)
+                {
+
+                    while (reader.Read())
+                    {
+
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            data[count, i] = reader.GetValue(i).ToString();
+                        }
+
+                        count++;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Pas de Mouvements pour les filtres demandées !");
                 }
 
                 // Finally close the connection     

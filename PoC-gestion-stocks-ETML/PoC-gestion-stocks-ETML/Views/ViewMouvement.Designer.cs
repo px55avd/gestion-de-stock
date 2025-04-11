@@ -44,6 +44,7 @@
             this.lblMenu = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.cmboxCategory = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnSearch
@@ -55,13 +56,15 @@
             this.btnSearch.TabIndex = 47;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtboxSearch
             // 
-            this.txtboxSearch.Location = new System.Drawing.Point(229, 73);
+            this.txtboxSearch.Location = new System.Drawing.Point(220, 73);
             this.txtboxSearch.Name = "txtboxSearch";
-            this.txtboxSearch.Size = new System.Drawing.Size(282, 23);
+            this.txtboxSearch.Size = new System.Drawing.Size(144, 23);
             this.txtboxSearch.TabIndex = 46;
+            this.txtboxSearch.Text = "Zone de recherche...";
             // 
             // lblNumberpages
             // 
@@ -203,13 +206,23 @@
             this.label1.Size = new System.Drawing.Size(801, 5);
             this.label1.TabIndex = 32;
             // 
+            // cmboxCategory
+            // 
+            this.cmboxCategory.FormattingEnabled = true;
+            this.cmboxCategory.Location = new System.Drawing.Point(370, 73);
+            this.cmboxCategory.Name = "cmboxCategory";
+            this.cmboxCategory.Size = new System.Drawing.Size(141, 23);
+            this.cmboxCategory.TabIndex = 48;
+            this.cmboxCategory.Text = "Catégorie";
+            // 
             // ViewMouvement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtboxSearch);
+            this.Controls.Add(this.cmboxCategory);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.lblNumberpages);
             this.Controls.Add(this.btnMibus);
             this.Controls.Add(this.btnUp);
@@ -251,5 +264,6 @@
         private Label lblMenu;
         private Label label2;
         private Label label1;
+        private ComboBox cmboxCategory;
     }
 }
